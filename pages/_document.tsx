@@ -10,6 +10,11 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <meta name="theme-color" content={theme.palette.primary.main} />
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+          <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon.png" />
+          <link rel="apple-touch-icon" sizes="192x192" href="/android-chrome-192x192.png" />
+          <link rel="apple-touch-icon" sizes="512x512" href="/android-chrome-512x512.png" />
           <link href="https://fonts.googleapis.com/css2?family=Alata&family=Roboto&display=swap" rel="stylesheet" />
           <script data-ad-client="ca-pub-5743230176334128" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         </Head>
