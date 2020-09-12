@@ -1,4 +1,4 @@
-import React from 'react';
+import ButtonLink from '@components/button-link/ButtonLink';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
@@ -7,13 +7,13 @@ import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import MenuIcon from '@material-ui/icons/Menu';
+import { createStyles,makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
-import ButtonLink from '@components/button-link/ButtonLink';
-import useBreakpoints from 'hooks/useBreakpoints';
+import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
+import useBreakpoints from 'hooks/useBreakpoints';
+import React from 'react';
 
 const drawerWidth = 240;
 
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(3),
     },
     backgroundColor: {
-        background: theme.palette.primary.main,
+      background: theme.palette.primary.main,
     },
   }),
 );
@@ -86,7 +86,7 @@ export default function DrawerLayout(props) {
       label: 'Base64 Decode',
       to: '/base64-decode'
     }
-  ]
+  ];
 
   const drawer = (
     <div>
@@ -126,7 +126,7 @@ export default function DrawerLayout(props) {
       <nav className={classes.drawer} aria-label="mailbox folders">
         <Drawer
           container={container}
-          variant={sm ? "permanent" : "temporary"}
+          variant={sm ? 'permanent' : 'temporary'}
           anchor={theme.direction === 'rtl' ? 'right' : 'left'}
           open={mobileOpen}
           onClose={handleDrawerToggle}

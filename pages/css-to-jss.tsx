@@ -1,12 +1,12 @@
-import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
 import { useTheme } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
+import React from 'react';
 
 
 
 export default function Index() {
- const theme = useTheme();
+  const theme = useTheme();
  
   return (
     <>
