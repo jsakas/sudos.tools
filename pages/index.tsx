@@ -71,10 +71,35 @@ export default function ResponsiveDrawer(props: Props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const navItems = [
+    {
+      label: 'CSS to JSS',
+    },
+    {
+      label: 'SVG to React'
+    },
+    {
+      label: 'JSON Diff',
+    },
+    {
+      label: 'Base64 Encode'
+    },
+    {
+      label: 'Base64 Decode',
+    }
+  ]
+
   const drawer = (
     <div>
       <div className={classes.toolbar} />
       <Divider />
+      <List>
+        {navItems.map((item) => (
+          <ListItem button key={item.label}>
+            <ListItemText primary={item.label} />
+          </ListItem>
+        ))}
+      </List>
     </div>
   );
 
