@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     appBar: {
+      boxShadow: 'none',
       [theme.breakpoints.up('sm')]: {
         width: `calc(100% - ${drawerWidth}px)`,
         marginLeft: drawerWidth,
@@ -43,13 +44,18 @@ const useStyles = makeStyles((theme: Theme) =>
     toolbar: theme.mixins.toolbar,
     drawerPaper: {
       width: drawerWidth,
+      borderRight: 0,
     },
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),
     },
-    backgroundColor: {
+    mobileToolbar: {
       background: theme.palette.primary.main,
+      display: 'flex',
+      alignItems: 'center',
+      color: theme.palette.common.white,
+      padding: theme.spacing(0, 2),
     },
   }),
 );
@@ -90,7 +96,11 @@ export default function DrawerLayout(props) {
 
   const drawer = (
     <div>
-      <div className={clsx(classes.toolbar, classes.backgroundColor)} />
+      <div className={clsx(classes.toolbar, classes.mobileToolbar)}>
+        <Typography variant="h6" noWrap>
+          devtool
+        </Typography>
+      </div>
       <Divider />
       <List>
         {navItems.map((item) => (
@@ -118,9 +128,11 @@ export default function DrawerLayout(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          {!sm  && (
+            <Typography variant="h6" noWrap>
             devtool
-          </Typography>
+            </Typography>
+          )}
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">

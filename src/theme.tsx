@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
 
 const theme = createMuiTheme({
@@ -13,6 +13,26 @@ const theme = createMuiTheme({
       default: '#fff',
     },
   },
+  typography: {
+    h1: {
+      fontFamily: 'Alata, "sans-serif"',
+    },
+    h2: {
+      fontFamily: 'Alata, "sans-serif"',
+    },
+    h3: {
+      fontFamily: 'Alata, "sans-serif"',
+    },
+    h4: {
+      fontFamily: 'Alata, "sans-serif"',
+    },
+    h5: {
+      fontFamily: 'Alata, "sans-serif"',
+    },
+    h6: {
+      fontFamily: 'Alata, "sans-serif"',
+    }
+  }
 });
 
-export default theme;
+export default responsiveFontSizes(theme);
