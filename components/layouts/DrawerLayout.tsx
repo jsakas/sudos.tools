@@ -70,14 +70,14 @@ export default function DrawerLayout(props) {
       label: 'CSS to JSS',
       to: '/css-to-jss'
     },
-    {
-      label: 'SVG to React',
-      to: '/svg-to-react'
-    },
-    {
-      label: 'JSON Diff',
-      to: '/json-diff'
-    },
+    // {
+    //   label: 'SVG to React',
+    //   to: '/svg-to-react'
+    // },
+    // {
+    //   label: 'JSON Diff',
+    //   to: '/json-diff'
+    // },
     {
       label: 'Base64 Encode',
       to: '/base64-encode'
