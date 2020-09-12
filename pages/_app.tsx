@@ -4,6 +4,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import React from 'react';
+import TagManager from 'react-gtm-module';
 
 import theme from '../src/theme';
 
@@ -17,6 +18,12 @@ export default function MyApp(props: AppProps) {
     if (jssStyles) {
       jssStyles.parentElement!.removeChild(jssStyles);
     }
+  }, []);
+
+  React.useEffect(() => {
+    TagManager.initialize({
+      gtmId: 'GTM-M3DF92T',
+    });
   }, []);
 
   return (
