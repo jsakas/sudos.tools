@@ -32,6 +32,13 @@ const theme = createMuiTheme({
     h6: {
       fontFamily: 'Alata, "sans-serif"',
     }
+  },
+  overrides: {
+    MuiDrawer: {
+      paper: {
+        background: '#f6f6f6'
+      }
+    }
   }
 });
 

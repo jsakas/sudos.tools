@@ -1,5 +1,6 @@
 import ButtonLink from '@components/button-link/ButtonLink';
 import AppBar from '@material-ui/core/AppBar';
+import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
@@ -13,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
 import useBreakpoints from 'hooks/useBreakpoints';
+import Link from 'next/link';
 import React from 'react';
 
 const drawerWidth = 240;
@@ -61,13 +63,19 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function Logo () {
+  const theme = useTheme();
+
   return (
-    <>
-      <img src="/sudo.png" width={50} />
-      <Typography variant="h6" component="div" noWrap>
-        Sudo&apos;s Tools
-      </Typography>
-    </>
+    <Link href="/">
+      <a style={{ color: theme.palette.common.white, textDecoration: 'none' }} title="Homepage">
+        <Box component="span" display="flex" alignItems="center">
+          <img src="/sudo.png" width={50} style={{ marginRight: theme.spacing(1) }} />
+          <Typography variant="h6" component="div" noWrap>
+            Sudo&apos;s Tools
+          </Typography>
+        </Box>
+      </a>
+    </Link>
   );
 }
 
@@ -75,7 +83,7 @@ export default function DrawerLayout(props) {
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] =  React.useState(false);
   const { sm } = useBreakpoints();
 
   const handleDrawerToggle = () => {
