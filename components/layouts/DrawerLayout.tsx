@@ -60,6 +60,17 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+function Logo () {
+  return (
+    <>
+      <img src="/sudo.png" width={50} />
+      <Typography variant="h6" component="div" noWrap>
+        Sudo&apos;s Tools
+      </Typography>
+    </>
+  );
+}
+
 export default function DrawerLayout(props) {
   const { window } = props;
   const classes = useStyles();
@@ -105,10 +116,7 @@ export default function DrawerLayout(props) {
   const drawer = (
     <div>
       <div className={clsx(classes.toolbar, classes.mobileToolbar)}>
-        <img src="/sudo.png" width={50} />
-        <Typography variant="h6" noWrap>
-          Sudo&apos;s Tools
-        </Typography>
+        <Logo />
       </div>
       <Divider />
       <List>
@@ -138,12 +146,7 @@ export default function DrawerLayout(props) {
             <MenuIcon />
           </IconButton>
           {!sm  && (
-            <>
-              <img src="/sudo.png" width={50} />
-              <Typography variant="h6" noWrap>
-                Sudo&apos;s Tools
-              </Typography>
-            </>
+            <Logo />
           )}
         </Toolbar>
       </AppBar>
