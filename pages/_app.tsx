@@ -1,12 +1,17 @@
+import '@integrations/Sentry';
+
 import DrawerLayout from '@components/layouts/DrawerLayout';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
+import theme from '@src/theme';
 import { AppProps } from 'next/app';
+import getConfig from 'next/config';
 import Head from 'next/head';
 import React from 'react';
 import TagManager from 'react-gtm-module';
 
-import theme from '../src/theme';
+const { publicRuntimeConfig } = getConfig();
+
 
 export default function MyApp(props: AppProps) {
   const { Component, pageProps } = props;
@@ -21,9 +26,11 @@ export default function MyApp(props: AppProps) {
   }, []);
 
   React.useEffect(() => {
-    TagManager.initialize({
-      gtmId: 'GTM-WLKT6HD',
-    });
+    if (process.browser) {
+      TagManager.initialize({
+        gtmId: publicRuntimeConfig.gtmId,
+      });
+    }
   }, []);
 
   return (

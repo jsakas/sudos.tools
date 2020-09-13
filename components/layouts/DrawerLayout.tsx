@@ -1,4 +1,6 @@
 import ButtonLink from '@components/button-link/ButtonLink';
+import Sentry from '@integrations/Sentry';
+import { Button } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,8 +16,11 @@ import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
 import useBreakpoints from 'hooks/useBreakpoints';
+import getConfig from 'next/config';
 import Link from 'next/link';
 import React from 'react';
+
+const { publicRuntimeConfig } = getConfig();
 
 const drawerWidth = 240;
 
@@ -156,6 +161,22 @@ export default function DrawerLayout(props) {
           {!sm  && (
             <Logo />
           )}
+
+          <Button
+            style={{ marginLeft: 'auto' }}
+            variant="contained"
+            onClick={() => {
+              Sentry.showReportDialog({
+                dsn: publicRuntimeConfig.sentryDsn,
+                title: 'Got a suggestion?',
+                subtitle: 'We\'d love to hear your feedback on how we can improve Sudo\'s Tools.',
+                subtitle2: '',
+                labelComments: 'Your feedback'
+              });
+            }}
+          >
+            Send Feedback
+          </Button>
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">

@@ -13,6 +13,8 @@
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
+    "@sentry/react": "^5.23.0",
+    "@sentry/tracing": "^5.23.0",
     "clsx": "^1.1.1",
     "jss-cli": "^6.0.1",
     "markdown-to-react-loader": "^1.2.0",

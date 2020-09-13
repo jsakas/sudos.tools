@@ -20,7 +20,10 @@
     "sourceMap": true,
     "baseUrl": "./",
     "paths": {
-        "@components/*": ["components/*"],
+      "@components/*": ["components/*"],
+      "@hooks/*": ["hooks/*"],
+      "@integrations/*": ["integrations/*"],
+      "@src/*": ["src/*"],
     }
   },
   "include": [
