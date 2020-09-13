@@ -9,12 +9,16 @@
     "lint": "eslint . --ext .ts,.tsx,.js"
   },
   "dependencies": {
+    "@babel/parser": "^7.11.5",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "clsx": "^1.1.1",
     "jss-cli": "^6.0.1",
+    "markdown-to-react-loader": "^1.2.0",
+    "marked": "^1.1.1",
     "next": "9.5.3",
+    "prettier": "^2.1.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-gtm-module": "^2.0.11"

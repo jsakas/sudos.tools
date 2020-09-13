@@ -4,58 +4,61 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
-import cssToJss from 'jss-cli/lib/cssToJss';
+import markdownToReact from 'markdown-to-react-loader/lib/markdown-to-react-loader';
+import parserBabel from 'prettier/parser-babel';
+import prettier from 'prettier/standalone';
 import React, { useCallback, useEffect,useState } from 'react';
 
-const initCss = `.example {
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 0 100px 100px 100px;
-  border-color: transparent transparent #007bff transparent;
-}`;
+const initInput = `# Hello, World
+
+This is a markdown document
+
+- List item 1
+- List item 2
+- List item 3
+`;
 
 export default function Index() {
   const theme = useTheme();
-  const [css, setCss] = useState('');
-  const [jss, setJss] = useState('');
+  const [input, setInput] = useState('');
+  const [output, setOutput] = useState('');
   const [error, setError] = useState<Error>();
-
-  const convert = useCallback((css  : string) : string => {
+  
+  const convert = useCallback((userInput  : string) : string => {
     setError(undefined);
-    let jss = '';
-
+    let converted = '';
+  
     try {
-      jss = cssToJss({
-        code: css,
-      });
+      converted = markdownToReact(userInput);
+      converted = prettier.format(converted, { semi: false, parser: 'babel', plugins: [parserBabel] });
     } catch (e) {
       console.error(e);
       setError(e);
-      return jss;
+      return converted;
     }
-
-    setJss(JSON.stringify(jss, null, 2));
+  
+    setOutput(converted);
   }, []);
-
+  
   useEffect(() => {
-    setCss(initCss);
-    convert(initCss);
+    setInput(initInput);
+    convert(initInput);
   }, []);
-
+  
   return (
     <>
       <Typography variant="h3" component="h1" gutterBottom>
-        Convert CSS to React JSS
+          Markdown to React
       </Typography>
       <Typography gutterBottom>
-        Use this tool to convert CSS styles to new React JSS syntax.
+          Use this tool to convert markdown to React JSX.
       </Typography>
       <Divider style={{ margin: theme.spacing(2, 0) }} />
+        
       {error && (
         <Alert severity="error" style={{ margin: theme.spacing(2, 0) }}>{error.message}</Alert>
       )}
-
+  
       <Grid container spacing={4}>
         <Grid item xs={12} md={6}>
           <TextField
@@ -63,9 +66,9 @@ export default function Index() {
             fullWidth
             multiline
             rows={10}
-            value={css}
+            value={input}
             onChange={(e) => {
-              setCss(e.target.value);
+              setInput(e.target.value);
               convert(e.target.value);
             }}
             inputProps={{
@@ -81,9 +84,9 @@ export default function Index() {
             fullWidth
             multiline
             rows={10}
-            value={jss}
+            value={output}
             onChange={(e) => {
-              setJss(e.target.value);
+              setOutput(e.target.value);
             }}
             inputProps={{
               style: {
@@ -96,3 +99,4 @@ export default function Index() {
     </>
   );
 }
+  

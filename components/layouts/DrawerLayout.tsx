@@ -76,6 +76,14 @@ export default function DrawerLayout(props) {
       label: 'CSS to JSS',
       to: '/css-to-jss'
     },
+    {
+      label: 'Markdown to HTML',
+      to: '/markdown-to-html'
+    },
+    {
+      label: 'Markdown to React',
+      to: '/markdown-to-react'
+    },
     // {
     //   label: 'SVG to React',
     //   to: '/svg-to-react'
