@@ -22,7 +22,7 @@ export default function MyApp(props: AppProps) {
 
   React.useEffect(() => {
     TagManager.initialize({
-      gtmId: 'GTM-M3DF92T',
+      gtmId: 'GTM-WLKT6HD',
     });
   }, []);
 
