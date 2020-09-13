@@ -162,21 +162,23 @@ export default function DrawerLayout(props) {
             <Logo />
           )}
 
-          <Button
-            style={{ marginLeft: 'auto' }}
-            variant="contained"
-            onClick={() => {
-              Sentry.showReportDialog({
-                dsn: publicRuntimeConfig.sentryDsn,
-                title: 'Got a suggestion?',
-                subtitle: 'We\'d love to hear your feedback on how we can improve Sudo\'s Tools.',
-                subtitle2: '',
-                labelComments: 'Your feedback'
-              });
-            }}
-          >
+          {sm && (
+            <Button
+              style={{ marginLeft: 'auto' }}
+              variant="contained"
+              onClick={() => {
+                Sentry.showReportDialog({
+                  dsn: publicRuntimeConfig.sentryDsn,
+                  title: 'Got a suggestion?',
+                  subtitle: 'We\'d love to hear your feedback on how we can improve Sudo\'s Tools.',
+                  subtitle2: '',
+                  labelComments: 'Your feedback'
+                });
+              }}
+            >
             Send Feedback
-          </Button>
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
