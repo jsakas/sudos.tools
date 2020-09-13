@@ -138,9 +138,12 @@ export default function DrawerLayout(props) {
             <MenuIcon />
           </IconButton>
           {!sm  && (
-            <Typography variant="h6" noWrap>
-            devtool
-            </Typography>
+            <>
+              <img src="/sudo.png" width={50} />
+              <Typography variant="h6" noWrap>
+                Sudo&apos;s Tools
+              </Typography>
+            </>
           )}
         </Toolbar>
       </AppBar>
