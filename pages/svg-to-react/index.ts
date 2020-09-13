@@ -1,2 +1,2 @@
-import page from './about';
-export default page;
+import index from './svg-to-react';
+export default index;
