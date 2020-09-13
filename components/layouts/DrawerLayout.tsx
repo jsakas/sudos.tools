@@ -134,7 +134,7 @@ export default function DrawerLayout(props) {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem button component={ButtonLink} href={item.to} key={item.label}>
+          <ListItem button component={ButtonLink} href={item.to} key={item.label} title={item.label}>
             <ListItemText primary={item.label} />
           </ListItem>
         ))}
