@@ -29,7 +29,7 @@ export default function MyApp(props: AppProps) {
   return (
     <React.Fragment>
       <Head>
-        <title>Devtool</title>
+        <title>Sudo&apos;s Tools</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <ThemeProvider theme={theme}>

@@ -97,8 +97,9 @@ export default function DrawerLayout(props) {
   const drawer = (
     <div>
       <div className={clsx(classes.toolbar, classes.mobileToolbar)}>
+        <img src="/sudod.png" width={50} />
         <Typography variant="h6" noWrap>
-          devtool
+          Sudo&apos;s Tools
         </Typography>
       </div>
       <Divider />
