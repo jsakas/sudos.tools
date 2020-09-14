@@ -133,6 +133,10 @@ export default function DrawerLayout(props) {
     //   to: '/json-diff'
     // },
     {
+      label: 'SQL Formatter',
+      to: '/format-sql',
+    },
+    {
       label: 'XML Formatter',
       to: '/format-xml',
     },
