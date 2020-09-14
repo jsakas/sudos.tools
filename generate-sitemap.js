@@ -16,6 +16,7 @@ const main = async () => {
   });
 
   const formatted = format(xml, {
+    indentation: '  ', 
     collapseContent: true,
   });
 

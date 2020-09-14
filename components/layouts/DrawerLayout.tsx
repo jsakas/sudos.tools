@@ -117,6 +117,10 @@ export default function DrawerLayout(props) {
     //   to: '/json-diff'
     // },
     {
+      label: 'XML Formatter',
+      to: '/format-xml',
+    },
+    {
       label: 'Base64 Encode',
       to: '/base64-encode'
     },
