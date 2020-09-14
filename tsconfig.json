@@ -24,6 +24,7 @@
       "@hooks/*": ["hooks/*"],
       "@integrations/*": ["integrations/*"],
       "@src/*": ["src/*"],
+      "@styles/*": ["styles/*"],
     }
   },
   "include": [

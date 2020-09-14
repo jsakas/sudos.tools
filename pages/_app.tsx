@@ -1,4 +1,5 @@
 import '@integrations/Sentry';
+import '@styles/globals.scss';
 
 import DrawerLayout from '@components/layouts/DrawerLayout';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,7 +12,6 @@ import React from 'react';
 import TagManager from 'react-gtm-module';
 
 const { publicRuntimeConfig } = getConfig();
-
 
 export default function MyApp(props: AppProps) {
   const { Component, pageProps } = props;
