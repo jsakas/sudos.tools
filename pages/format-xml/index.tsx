@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
+import { NextSeo } from 'next-seo';
 import React, { useCallback, useEffect, useState } from 'react';
 import xmlFormat from 'xml-formatter';
 
@@ -13,6 +14,12 @@ const initInput = `<root>
 
 </content>
 </root>`;
+
+const seo = {
+  title: 'XML Formatter',
+  description: 'Use this tool to format and beautify XML.',
+};
+
 
 export default function Index() {
   const theme = useTheme();
@@ -45,11 +52,12 @@ export default function Index() {
 
   return (
     <>
+      <NextSeo {...seo} />
       <Typography variant="h3" component="h1" gutterBottom>
-        XML Formatter
+        {seo.title}
       </Typography>
       <Typography gutterBottom>
-        Use this tool to format and beautify XML.
+        {seo.description}
       </Typography>
       <Divider style={{ margin: theme.spacing(2, 0) }} />
 

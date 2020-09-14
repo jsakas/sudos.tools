@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
 import marked from 'marked';
+import { NextSeo } from 'next-seo';
 import React, { useCallback, useEffect,useState } from 'react';
 
 const initInput = `# Hello, World
@@ -15,6 +16,12 @@ This is a markdown document
 - List item 2
 - List item 3
 `;
+
+const seo = {
+  title: ' Markdown to HTML',
+  description: 'Use this tool to convert markdown to HTML.',
+};
+
 
 export default function Index() {
   const theme = useTheme();
@@ -44,11 +51,12 @@ export default function Index() {
   
   return (
     <>
+      <NextSeo {...seo} />
       <Typography variant="h3" component="h1" gutterBottom>
-          Markdown to HTML
+        {seo.title}
       </Typography>
       <Typography gutterBottom>
-          Use this tool to convert markdown to HTML.
+        {seo.description}
       </Typography>
       <Divider style={{ margin: theme.spacing(2, 0) }} />
         

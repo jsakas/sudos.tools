@@ -90,7 +90,7 @@ function Logo() {
     <Link href="/">
       <a style={{ color: theme.palette.common.white, textDecoration: 'none' }} title="Homepage">
         <Box component="span" display="flex" alignItems="center">
-          <img src="/sudo.png" width={50} style={{ marginRight: theme.spacing(1) }} />
+          <img alt="Sudo the Dog" src="/sudo.png" width={50} style={{ marginRight: theme.spacing(1) }} />
           <Typography variant="h6" component="div" noWrap>
             Sudo&apos;s Tools
           </Typography>

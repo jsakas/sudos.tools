@@ -22,6 +22,7 @@
     "markdown-to-react-loader": "^1.2.0",
     "marked": "^1.1.1",
     "next": "9.5.3",
+    "next-seo": "^4.7.3",
     "prettier": "^2.1.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",

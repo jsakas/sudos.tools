@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
 import cssToJss from 'jss-cli/lib/cssToJss';
+import { NextSeo } from 'next-seo';
 import React, { useCallback, useEffect, useState } from 'react';
 
 const initInput = `.example {
@@ -14,6 +15,11 @@ const initInput = `.example {
   border-width: 0 100px 100px 100px;
   border-color: transparent transparent #007bff transparent;
 }`;
+
+const seo = {
+  title: 'CSS to React JSS',
+  description: 'Use this tool to convert CSS styles to new React JSS syntax.',
+};
 
 export default function Index() {
   const theme = useTheme();
@@ -45,11 +51,12 @@ export default function Index() {
 
   return (
     <>
+      <NextSeo {...seo} />
       <Typography variant="h3" component="h1" gutterBottom>
-        CSS to React JSS
+        {seo.title}
       </Typography>
       <Typography gutterBottom>
-        Use this tool to convert CSS styles to new React JSS syntax.
+        {seo.description}
       </Typography>
       <Divider style={{ margin: theme.spacing(2, 0) }} />
 

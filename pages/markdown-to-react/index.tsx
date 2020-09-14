@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
 import markdownToReact from 'markdown-to-react-loader/lib/markdown-to-react-loader';
+import { NextSeo } from 'next-seo';
 import parserBabel from 'prettier/parser-babel';
 import prettier from 'prettier/standalone';
 import React, { useCallback, useEffect,useState } from 'react';
@@ -17,6 +18,11 @@ This is a markdown document
 - List item 2
 - List item 3
 `;
+
+const seo = {
+  title: 'Markdown to React',
+  description: 'Use this tool to convert markdown to React JSX.',
+};
 
 export default function Index() {
   const theme = useTheme();
@@ -47,11 +53,12 @@ export default function Index() {
   
   return (
     <>
+      <NextSeo {...seo} />
       <Typography variant="h3" component="h1" gutterBottom>
-          Markdown to React
+        {seo.title}
       </Typography>
       <Typography gutterBottom>
-          Use this tool to convert markdown to React JSX.
+        {seo.description}
       </Typography>
       <Divider style={{ margin: theme.spacing(2, 0) }} />
         

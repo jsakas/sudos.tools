@@ -4,9 +4,15 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
+import { NextSeo } from 'next-seo';
 import React, { useCallback, useEffect,useState } from 'react';
 
 const initInput = 'Thanks for using our devtool';
+
+const seo = {
+  title: 'Base64 Encode',
+  description: 'Use this tool to take a string and encode it using the base64 algorithm.',
+};
 
 export default function Index() {
   const theme = useTheme();
@@ -36,11 +42,12 @@ export default function Index() {
 
   return (
     <>
+      <NextSeo {...seo} />
       <Typography variant="h3" component="h1" gutterBottom>
-        Base64 Encode
+        {seo.title}
       </Typography>
       <Typography gutterBottom>
-        Use this tool to take a string and encode it using the base64 algorithm.
+        {seo.description}
       </Typography>
       <Divider style={{ margin: theme.spacing(2, 0) }} />
       {error && (
