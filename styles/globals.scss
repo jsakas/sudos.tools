@@ -4,6 +4,11 @@ body {
   margin: 0;
 }
 
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
+
 .sentry-error-embed-wrapper {
   z-index: 9999 !important;
 }

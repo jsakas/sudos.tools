@@ -6,11 +6,12 @@ import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
+import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { createStyles,makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -28,6 +29,7 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
+      minHeight: '100vh',
     },
     drawer: {
       [theme.breakpoints.up('sm')]: {
@@ -53,9 +55,16 @@ const useStyles = makeStyles((theme: Theme) =>
       width: drawerWidth,
       borderRight: 0,
     },
-    content: {
+    contentWrapper: {
       flexGrow: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      minHeight: '100vh',
+    },
+    content: {
       padding: theme.spacing(3),
+      flex: 1,
+      minHeight: '100vh',
     },
     mobileToolbar: {
       background: theme.palette.primary.main,
@@ -64,10 +73,17 @@ const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.common.white,
       padding: theme.spacing(0, 2),
     },
+    footer: {
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.primary.contrastText,
+      padding: theme.spacing(3),
+      flex: 1,
+      minHeight: '50vh',
+    }
   }),
 );
 
-function Logo () {
+function Logo() {
   const theme = useTheme();
 
   return (
@@ -88,7 +104,7 @@ export default function DrawerLayout(props) {
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
-  const [mobileOpen, setMobileOpen] =  React.useState(false);
+  const [mobileOpen, setMobileOpen] = React.useState(false);
   const { sm } = useBreakpoints();
 
   const handleDrawerToggle = () => {
@@ -130,21 +146,20 @@ export default function DrawerLayout(props) {
     }
   ];
 
-  const drawer = (
-    <div>
-      <div className={clsx(classes.toolbar, classes.mobileToolbar)}>
-        <Logo />
-      </div>
-      <Divider />
-      <List>
-        {navItems.map((item) => (
-          <ListItem button component={ButtonLink} href={item.to} key={item.label} title={item.label}>
-            <ListItemText primary={item.label} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
+  const legalItems = [
+    {
+      label: 'About',
+      to: '/about'
+    },
+    {
+      label: 'Privacy Policy',
+      to: '/privacy-policy'
+    },
+    {
+      label: 'Cookie Policy',
+      to: '/cookie-policy'
+    },
+  ];
 
   const container = window !== undefined ? () => window().document.body : undefined;
 
@@ -162,7 +177,7 @@ export default function DrawerLayout(props) {
           >
             <MenuIcon />
           </IconButton>
-          {!sm  && (
+          {!sm && (
             <Logo />
           )}
 
@@ -180,12 +195,12 @@ export default function DrawerLayout(props) {
                 });
               }}
             >
-            Send Feedback
+              Send Feedback
             </Button>
           )}
         </Toolbar>
       </AppBar>
-      <nav className={classes.drawer} aria-label="mailbox folders">
+      <nav className={classes.drawer} aria-label="Website Navigation">
         <Drawer
           container={container}
           variant={sm ? 'permanent' : 'temporary'}
@@ -199,13 +214,59 @@ export default function DrawerLayout(props) {
             keepMounted: true, // Better open performance on mobile.
           }}
         >
-          {drawer}
+          <div>
+            <div className={clsx(classes.toolbar, classes.mobileToolbar)}>
+              <Logo />
+            </div>
+            <Divider />
+            <List>
+              {navItems.map((item) => (
+                <ListItem button component={ButtonLink} href={item.to} key={item.label} title={item.label}>
+                  <ListItemText primary={item.label} />
+                </ListItem>
+              ))}
+            </List>
+          </div>
         </Drawer>
       </nav>
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        {props.children}
-      </main>
+      <div className={classes.contentWrapper}>
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          {props.children}
+        </main>
+        <footer className={classes.footer}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} md={6} lg={3}>
+              <Typography variant="h4" gutterBottom>
+                Tools
+              </Typography>
+              {navItems.map((item) => (
+                <Link href={item.to} key={item.label}>
+                  <a>
+                    <Typography component="a" title={item.label}>
+                      <ListItemText primary={item.label} />
+                    </Typography>
+                  </a>
+                </Link>
+              ))}
+            </Grid>
+            <Grid item xs={12} md={6} lg={3}>
+              <Typography variant="h4" gutterBottom>
+                Links
+              </Typography>
+              {legalItems.map((item) => (
+                <Link href={item.to} key={item.label}>
+                  <a>
+                    <Typography title={item.label}>
+                      <ListItemText primary={item.label} />
+                    </Typography>
+                  </a>
+                </Link>
+              ))}
+            </Grid>
+          </Grid>
+        </footer>
+      </div>
     </div>
   );
 }
