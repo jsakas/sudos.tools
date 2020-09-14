@@ -5,7 +5,7 @@ const format = require('xml-formatter');
 const main = async () => {
   await sitemap({
     baseUrl: 'https://sudos.tools',
-    pagesDirectory: __dirname + '/.next/server/pages',
+    pagesDirectory: __dirname + '/.next/serverless/pages',
     targetDirectory: 'public/',
     ignoredExtensions: ['js', 'map'],
     ignoredPaths: ['[fallback]'],
