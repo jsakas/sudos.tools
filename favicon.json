@@ -1,0 +1,21 @@
+{
+    "appName": "Free Formatter Tools",
+    "appShortName": "Free Formatter Tools",
+    "appDescription": "Free online tools for developers, including formatters, minifiers, validators, compactors and many more!",
+    "developerName": "Doubledrop",
+    "developerURL": "https://doubledrop.co",
+    "lang": "en-US",
+    "background": "#2a2a2a",
+    "theme_color": "#2a2a2a",
+    "appleStatusBarStyle": "default",
+    "icons": {
+        "android": true,
+        "appleIcon": true,
+        "appleStartup": true,
+        "coast": true,
+        "favicons": true,
+        "firefox": true,
+        "windows": true,
+        "yandex": true
+    }
+}

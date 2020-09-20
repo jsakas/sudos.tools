@@ -5,10 +5,9 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
 import markdownToReact from 'markdown-to-react-loader/lib/markdown-to-react-loader';
-import { NextSeo } from 'next-seo';
 import parserBabel from 'prettier/parser-babel';
 import prettier from 'prettier/standalone';
-import React, { useCallback, useEffect,useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 const initInput = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
 <path
@@ -25,11 +24,11 @@ export default function Index() {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [error, setError] = useState<Error>();
-  
-  const convert = useCallback((userInput  : string) : string => {
+
+  const convert = useCallback((userInput: string): string => {
     setError(undefined);
     let converted = '';
-  
+
     try {
       converted = markdownToReact(userInput);
       converted = prettier.format(converted, { semi: false, parser: 'babel', plugins: [parserBabel] });
@@ -38,18 +37,18 @@ export default function Index() {
       setError(e);
       return converted;
     }
-  
+
     setOutput(converted);
   }, []);
-  
+
   useEffect(() => {
     setInput(initInput);
     convert(initInput);
   }, []);
-  
+
   return (
     <>
-      <NextSeo {...seo} />
+
       <Typography variant="h3" component="h1" gutterBottom>
         {seo.title}
       </Typography>
@@ -57,11 +56,11 @@ export default function Index() {
         {seo.description}
       </Typography>
       <Divider style={{ margin: theme.spacing(2, 0) }} />
-        
+
       {error && (
         <Alert severity="error" style={{ margin: theme.spacing(2, 0) }}>{error.message}</Alert>
       )}
-  
+
       <Grid container spacing={4}>
         <Grid item xs={12} md={6}>
           <TextField
@@ -102,4 +101,3 @@ export default function Index() {
     </>
   );
 }
-  

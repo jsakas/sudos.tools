@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
-import { NextSeo } from 'next-seo';
 import React, { useCallback, useEffect, useState } from 'react';
 import xmlFormat from 'xml-formatter';
 
@@ -33,7 +32,7 @@ export default function Index() {
 
     try {
       converted = xmlFormat(userInput, {
-        indentation: '  ', 
+        indentation: '  ',
         collapseContent: true,
       });
     } catch (e) {
@@ -52,7 +51,7 @@ export default function Index() {
 
   return (
     <>
-      <NextSeo {...seo} />
+
       <Typography variant="h3" component="h1" gutterBottom>
         {seo.title}
       </Typography>

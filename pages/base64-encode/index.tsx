@@ -4,8 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
-import { NextSeo } from 'next-seo';
-import React, { useCallback, useEffect,useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 const initInput = 'Thanks for using our devtool';
 
@@ -20,7 +19,7 @@ export default function Index() {
   const [output, setOutput] = useState('');
   const [error, setError] = useState<Error>();
 
-  const convert = useCallback((userInput  : string) : string => {
+  const convert = useCallback((userInput: string): string => {
     setError(undefined);
     let converted = '';
 
@@ -42,7 +41,7 @@ export default function Index() {
 
   return (
     <>
-      <NextSeo {...seo} />
+
       <Typography variant="h3" component="h1" gutterBottom>
         {seo.title}
       </Typography>

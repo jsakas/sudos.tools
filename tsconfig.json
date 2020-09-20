@@ -1,36 +1,47 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
     "module": "esnext",
+    "target": "es5",
+    "jsx": "react",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "sourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "allowJs": true,
     "baseUrl": "./",
+    "sourceMap": true,
+    "strict": false,
     "paths": {
-      "@components/*": ["components/*"],
-      "@hooks/*": ["hooks/*"],
-      "@integrations/*": ["integrations/*"],
-      "@src/*": ["src/*"],
-      "@styles/*": ["styles/*"],
+      "@components/*": [
+        "components/*"
+      ],
+      "@hooks/*": [
+        "hooks/*"
+      ],
+      "@integrations/*": [
+        "integrations/*"
+      ],
+      "@src/*": [
+        "src/*"
+      ],
+      "@styles/*": [
+        "styles/*"
+      ],
+      "@images/*": [
+        "images/*"
+      ],
+      "@pages/*": [
+        "pages/*"
+      ],
+      "@routes": [
+        "routes"
+      ],
     }
   },
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "conf/production/public.js",
+    "conf/development/public.js"
   ],
   "exclude": [
     "node_modules"

@@ -1,6 +1,5 @@
-import ButtonLink from '@components/button-link/ButtonLink';
-import Sentry from '@integrations/Sentry';
-import { Button } from '@material-ui/core';
+import LinkBehavior from '@components/link-behavior/LinkBehavior';
+import logoImage from '@images/sudo.png';
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,13 +14,11 @@ import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/sty
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
+import routes from '@routes';
 import clsx from 'clsx';
 import useBreakpoints from 'hooks/useBreakpoints';
-import getConfig from 'next/config';
-import Link from 'next/link';
 import React from 'react';
-
-const { publicRuntimeConfig } = getConfig();
+import { Link as RouterLink } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -87,16 +84,14 @@ function Logo() {
   const theme = useTheme();
 
   return (
-    <Link href="/">
-      <a style={{ color: theme.palette.common.white, textDecoration: 'none' }} title="Homepage">
-        <Box component="span" display="flex" alignItems="center">
-          <img alt="Sudo the Dog" src="/sudo.png" width={50} style={{ marginRight: theme.spacing(1) }} />
-          <Typography variant="h6" component="div" noWrap>
-            Sudo&apos;s Tools
-          </Typography>
-        </Box>
-      </a>
-    </Link>
+    <RouterLink to="/" style={{ color: theme.palette.common.white, textDecoration: 'none' }} title="Homepage">
+      <Box component="span" display="flex" alignItems="center">
+        <img alt="Sudo the Dog" src={logoImage} width={50} style={{ marginRight: theme.spacing(1) }} />
+        <Typography variant="h6" component="div" noWrap>
+          Sudo&apos;s Tools
+        </Typography>
+      </Box>
+    </RouterLink>
   );
 }
 
@@ -110,60 +105,6 @@ export default function DrawerLayout(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
-  const navItems = [
-    {
-      label: 'CSS to JSS',
-      to: '/css-to-jss'
-    },
-    {
-      label: 'Markdown to HTML',
-      to: '/markdown-to-html'
-    },
-    {
-      label: 'Markdown to React',
-      to: '/markdown-to-react'
-    },
-    // {
-    //   label: 'SVG to React',
-    //   to: '/svg-to-react'
-    // },
-    // {
-    //   label: 'JSON Diff',
-    //   to: '/json-diff'
-    // },
-    {
-      label: 'SQL Formatter',
-      to: '/format-sql',
-    },
-    {
-      label: 'XML Formatter',
-      to: '/format-xml',
-    },
-    {
-      label: 'Base64 Encode',
-      to: '/base64-encode'
-    },
-    {
-      label: 'Base64 Decode',
-      to: '/base64-decode'
-    }
-  ];
-
-  const legalItems = [
-    {
-      label: 'About',
-      to: '/about'
-    },
-    {
-      label: 'Privacy Policy',
-      to: '/privacy-policy'
-    },
-    {
-      label: 'Cookie Policy',
-      to: '/cookie-policy'
-    },
-  ];
 
   const container = window !== undefined ? () => window().document.body : undefined;
 
@@ -185,23 +126,6 @@ export default function DrawerLayout(props) {
             <Logo />
           )}
 
-          {sm && (
-            <Button
-              style={{ marginLeft: 'auto' }}
-              variant="contained"
-              onClick={() => {
-                Sentry.showReportDialog({
-                  dsn: publicRuntimeConfig.sentryDsn,
-                  title: 'Got a suggestion?',
-                  subtitle: 'We\'d love to hear your feedback on how we can improve Sudo\'s Tools.',
-                  subtitle2: '',
-                  labelComments: 'Your feedback'
-                });
-              }}
-            >
-              Send Feedback
-            </Button>
-          )}
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="Website Navigation">
@@ -224,9 +148,9 @@ export default function DrawerLayout(props) {
             </div>
             <Divider />
             <List>
-              {navItems.map((item) => (
-                <ListItem button component={ButtonLink} href={item.to} key={item.label} title={item.label}>
-                  <ListItemText primary={item.label} />
+              {routes.filter(route => route.menus?.indexOf('tools') > -1).map((route) => (
+                <ListItem button component={LinkBehavior} href={route.path} key={route.title} title={route.title}>
+                  <ListItemText primary={route.title} />
                 </ListItem>
               ))}
             </List>
@@ -244,28 +168,24 @@ export default function DrawerLayout(props) {
               <Typography variant="h4" gutterBottom>
                 Tools
               </Typography>
-              {navItems.map((item) => (
-                <Link href={item.to} key={item.label}>
-                  <a>
-                    <Typography component="a" title={item.label}>
-                      <ListItemText primary={item.label} />
-                    </Typography>
-                  </a>
-                </Link>
+              {routes.filter(route => route.menus?.indexOf('tools') > -1).map((route) => (
+                <RouterLink to={route.path} key={route.title}>
+                  <Typography component="span" title={route.title} style={{ color: theme.palette.common.white }}>
+                    <ListItemText primary={route.title} />
+                  </Typography>
+                </RouterLink>
               ))}
             </Grid>
             <Grid item xs={12} md={6} lg={3}>
               <Typography variant="h4" gutterBottom>
                 Links
               </Typography>
-              {legalItems.map((item) => (
-                <Link href={item.to} key={item.label}>
-                  <a>
-                    <Typography title={item.label}>
-                      <ListItemText primary={item.label} />
-                    </Typography>
-                  </a>
-                </Link>
+              {routes.filter(route => route.menus?.indexOf('links') > -1).map((route) => (
+                <RouterLink to={route.path} key={route.title}>
+                  <Typography component="span" title={route.title} style={{ color: theme.palette.common.white }}>
+                    <ListItemText primary={route.title} />
+                  </Typography>
+                </RouterLink>
               ))}
             </Grid>
           </Grid>
