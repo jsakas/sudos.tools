@@ -3,31 +3,22 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
+import { cssfmt } from 'cssfmt';
+import postcss from 'postcss';
 import React, { useCallback, useEffect, useState } from 'react';
 import MonacoEditor from 'react-monaco-editor';
-import Sass from 'sass.js/dist/sass.js';
 
-// @ts-ignore
-import sassWorker from '!!file-loader!sass.js/dist/sass.worker.js';
-
-const sass = new Sass(sassWorker);
-
-const initInput = `$primary: black;
-$secondary: rgba($primary, .5);
-
-.my-class {
-  color: $secondary;
-
-  body.loaded & {
-    color: $primary;
-  }
-}
+const initInput = `.my-class {
+  color: rgba(0, 0, 0, 0.5); }
+  body.loaded .my-class {
+    color: black; }
 `;
 
 const seo = {
-  title: 'Sass Compiler',
-  description: 'Use this tool to compile sass quickly in the browser.',
+  title: 'CSS Formatter',
+  description: 'Use this tool to format and beautify CSS.',
 };
+
 
 export default function Index() {
   const theme = useTheme();
@@ -37,29 +28,20 @@ export default function Index() {
 
   const convert = useCallback((userInput: string): string => {
     setError(undefined);
-    const converted = '';
+    let converted = '';
 
     try {
-
-      sass.compile(
-        userInput,
-        {
-          style: Sass.style.expanded
-        },
-        function (converted) {
-          if (converted.status === 1) {
-            console.error(converted);
-            setError(new Error(converted.message));
-          }
-
-          setOutput(converted.text);
-        });
-
+      converted = postcss()
+        .use(cssfmt())
+        .process(userInput)
+        .css;
     } catch (e) {
       console.error(e);
       setError(e);
       return converted;
     }
+
+    setOutput(converted);
   }, []);
 
   useEffect(() => {
@@ -92,7 +74,7 @@ export default function Index() {
             }}
             width="100%"
             height={500}
-            language="scss"
+            language="css"
             value={input}
             onChange={(value) => {
               setInput(value);

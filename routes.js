@@ -69,6 +69,13 @@ module.exports = [
     sitemap: true,
   },
   {
+    title: 'CSS Formatter',
+    path: '/format-css',
+    page: () => import('@pages/format-css'),
+    menus: ['tools'],
+    sitemap: true,
+  },
+  {
     title: 'Base64 Encode',
     path: '/base64-encode',
     page: () => import('@pages/base64-encode'),

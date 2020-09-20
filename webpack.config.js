@@ -1,5 +1,5 @@
 const path = require('path');
-const { DefinePlugin } = require('webpack');
+const { DefinePlugin, NormalModuleReplacementPlugin } = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
@@ -37,6 +37,7 @@ module.exports = {
   stats: 'errors-only',
   node: {
     fs: 'empty',
+    path: 'empty',
   },
   devServer: {
     host: '0.0.0.0',
@@ -102,7 +103,11 @@ module.exports = {
         'sql',
         'markdown',
       ],
-    })
+    }),
+    new NormalModuleReplacementPlugin(
+      /cssfmt\/lib\/config.js/,
+      path.resolve(__dirname, 'overrides/cssfmt/config.js')
+    )
   ].filter(i => i),
   resolve: {
     plugins: [
