@@ -70,7 +70,7 @@ function App() {
                           <meta property="og:site_name" content="Sudo&#x27;s Tools" />
                         </Helmet>
                         <div style={{
-                          flex: 1,
+                          flex: '1 1 auto',
                           minHeight: '100vh',
                           padding: routes[route].padding || theme.spacing(3)
                         }}

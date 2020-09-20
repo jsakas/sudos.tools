@@ -1,3 +1,4 @@
+import useRouter from '@hooks/useRouter';
 import logoImage from '@images/sudo-sm.png';
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
@@ -16,7 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
 import useBreakpoints from 'hooks/useBreakpoints';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import routes from '../../routes';
@@ -61,7 +62,7 @@ const useStyles = makeStyles((theme: Theme) =>
       minHeight: '100vh',
     },
     content: {
-      flex: 1,
+      flex: '1 1 auto',
       minHeight: '100vh',
     },
     mobileToolbar: {
@@ -78,7 +79,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.primary.main,
       color: theme.palette.primary.contrastText,
       padding: theme.spacing(3),
-      flex: 1,
+      flex: '1 1 auto',
     }
   }),
 );
@@ -104,6 +105,11 @@ function DrawerLayout(props) {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const { sm, md } = useBreakpoints();
+  const router = useRouter();
+
+  useEffect(() => {
+    return router.history.listen(() => setMobileOpen(false));
+  }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);

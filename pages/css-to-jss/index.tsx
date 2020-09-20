@@ -66,6 +66,7 @@ export default function Index() {
       <Grid container spacing={4}>
         <Grid item xs={12} md={6}>
           <MonacoEditor
+            theme="vs-dark"
             options={{
               minimap: {
                 enabled: false,
@@ -83,6 +84,7 @@ export default function Index() {
         </Grid>
         <Grid item xs={12} md={6}>
           <MonacoEditor
+            theme="vs-dark"
             options={{
               minimap: {
                 enabled: false,

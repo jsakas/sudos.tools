@@ -41,7 +41,7 @@ class ErrorBoundary extends React.Component<ThemedComponentProps> {
 
     if (hasError) {
       return (
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: '1 1 auto' }}>
           <Error
             title={(error && error.title) || title}
             message={(error && error.message) || message}
