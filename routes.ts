@@ -1,67 +1,66 @@
 export default [
   {
-    title: 'Home',
+    title: 'Free online development tools',
     path: '/',
     page: require('@pages/index'),
   },
   {
     title: 'CSS to JSS',
     path: '/css-to-jss',
-    menus: ['tools'],
     page: require('@pages/css-to-jss'),
+    menus: ['tools'],
   },
   {
     title: 'Markdown to HTML',
     path: '/markdown-to-html',
-    menus: ['tools'],
     page: require('@pages/markdown-to-html'),
+    menus: ['tools'],
   },
   {
     title: 'Markdown to React',
     path: '/markdown-to-react',
-    menus: ['tools'],
     page: require('@pages/markdown-to-react'),
+    menus: ['tools'],
   },
   {
     title: 'SQL Formatter',
     path: '/format-sql',
-    menus: ['tools'],
     page: require('@pages/format-sql'),
+    menus: ['tools'],
   },
   {
     title: 'XML Formatter',
     path: '/format-xml',
-    menus: ['tools'],
     page: require('@pages/format-xml'),
+    menus: ['tools'],
   },
   {
     title: 'Base64 Encode',
     path: '/base64-encode',
-    menus: ['tools'],
     page: require('@pages/base64-encode'),
+    menus: ['tools'],
   },
   {
     title: 'Base64 Decode',
     path: '/base64-decode',
-    menus: ['tools'],
     page: require('@pages/base64-decode'),
-  },
-  {
-    title: 'About',
-    path: '/about',
-    menus: ['links'],
-    page: require('@pages/about'),
+    menus: ['tools'],
   },
   {
     title: 'Privacy Policy',
     path: '/privacy-policy',
-    menus: ['links'],
     page: require('@pages/privacy-policy'),
+    menus: ['links'],
   },
   {
     title: 'Cookie Policy',
     path: '/cookie-policy',
-    menus: ['links'],
     page: require('@pages/cookie-policy'),
+    menus: ['links'],
   },
+  {
+    title: 'Not Found',
+    path: '**',
+    page: require('@pages/404'),
+  }
 ];
