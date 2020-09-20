@@ -4,9 +4,9 @@ import '@styles/global.css';
 import ErrorBoundary from '@components/error/ErrorBoundary';
 import DrawerLayout from '@components/layouts/DrawerLayout';
 import ScrollToTop from '@components/scroll-to-top/ScrollToTop';
+import loadable from '@loadable/component';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
-import routes from './routes';
 import theme from '@src/theme';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -14,6 +14,7 @@ import TagManager from 'react-gtm-module';
 import { Helmet } from 'react-helmet';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+import routes from './routes';
 import seo from './seo';
 
 function App() {
@@ -30,7 +31,7 @@ function App() {
       <ScrollToTop />
       <Switch>
         {Object.keys(routes).map((route) => {
-          const Page = require(routes[route].page).default;
+          const Page = loadable(routes[route].page);
           const path = routes[route].path;
           const title = routes[route].title;
           const description = routes[route].description;

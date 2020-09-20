@@ -14,11 +14,12 @@ import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/sty
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
-import routes from '../../routes';
 import clsx from 'clsx';
 import useBreakpoints from 'hooks/useBreakpoints';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+
+import routes from '../../routes';
 
 const drawerWidth = 240;
 
