@@ -41,6 +41,13 @@ module.exports = [
     sitemap: true,
   },
   {
+    title: 'JSON Diff Tool',
+    path: '/json-diff',
+    page: () => import('@pages/json-diff'),
+    menus: ['tools'],
+    sitemap: true,
+  },
+  {
     title: 'XML Formatter',
     path: '/format-xml',
     page: () => import('@pages/format-xml'),
