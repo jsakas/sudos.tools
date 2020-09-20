@@ -1,4 +1,4 @@
-import logoImage from '@images/sudo.png';
+import logoImage from '@images/sudo-sm.png';
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
 import CssBaseline from '@material-ui/core/CssBaseline';
