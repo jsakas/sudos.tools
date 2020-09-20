@@ -3,6 +3,7 @@ const { DefinePlugin } = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const SentryCliPlugin = require('@sentry/webpack-plugin');
 
@@ -46,11 +47,17 @@ module.exports = {
     contentBase: BUILD_DIR,
   },
   entry: {
-    main: './app.tsx',
-    sentry: './integrations/Sentry.ts',
+    'main': './app.tsx',
+    'sentry': './integrations/Sentry.ts',
+    'editor.worker': 'monaco-editor/esm/vs/editor/editor.worker.js',
+    'json.worker': 'monaco-editor/esm/vs/language/json/json.worker',
+    'css.worker': 'monaco-editor/esm/vs/language/css/css.worker',
+    'html.worker': 'monaco-editor/esm/vs/language/html/html.worker',
+    'ts.worker': 'monaco-editor/esm/vs/language/typescript/ts.worker'
   },
   output: {
-    filename: '[name].[hash].js',
+    globalObject: 'self',
+    filename: '[name].bundle.js',
     path: path.resolve(BUILD_DIR, 'static'),
     publicPath: '/static/',
   },
@@ -83,12 +90,25 @@ module.exports = {
       include: './public',
       release: fixSentryRelease(GITHUB_REF) || GITHUB_SHA,
     }),
+    new MonacoWebpackPlugin({
+      // available options are documented at https://github.com/Microsoft/monaco-editor-webpack-plugin#options
+      languages: [
+        'json',
+        'javascript',
+        'typescript',
+        'css',
+        'scss',
+        'xml',
+        'sql',
+        'markdown',
+      ],
+    })
   ].filter(i => i),
   resolve: {
     plugins: [
       new TsconfigPathsPlugin({
         configFile: path.resolve(__dirname, 'tsconfig.json'),
-      })
+      }),
     ],
     extensions: ['.tsx', '.ts', '.js'],
   },
@@ -108,6 +128,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        include: [
+          path.resolve(__dirname, './node_modules/monaco-editor'),
+          path.resolve(__dirname, 'styles'),
+        ],
         use: [
           'style-loader',
           'css-loader',

@@ -1,10 +1,10 @@
 import { useTheme } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
 import React, { useCallback, useEffect, useState } from 'react';
+import MonacoEditor from 'react-monaco-editor';
 
 const initInput = '{"declaration":{"attributes":{"version":"1.0","encoding":"UTF-8"}},"elements":[{"type":"element","name":"urlset","attributes":{"xmlns":"http://www.sitemaps.org/schemas/sitemap/0.9"},"elements":[{"type":"element","name":"url","elements":[{"type":"element","name":"loc","elements":[{"type":"text","text":"http://www.example.com/"}]},{"type":"element","name":"lastmod","elements":[{"type":"text","text":"2005-01-01"}]},{"type":"element","name":"changefreq","elements":[{"type":"text","text":"monthly"}]},{"type":"element","name":"priority","elements":[{"type":"text","text":"0.8"}]}]}]}]}';
 
@@ -57,37 +57,35 @@ export default function Index() {
 
       <Grid container spacing={4}>
         <Grid item xs={12} md={6}>
-          <TextField
-            variant="outlined"
-            fullWidth
-            multiline
-            rows={10}
-            value={input}
-            onChange={(e) => {
-              setInput(e.target.value);
-              convert(e.target.value);
-            }}
-            inputProps={{
-              style: {
-                fontFamily: 'monospace',
+          <MonacoEditor
+            options={{
+              minimap: {
+                enabled: false,
               }
+            }}
+            width="100%"
+            height={500}
+            language="json"
+            value={input}
+            onChange={(value) => {
+              setInput(value);
+              convert(value);
             }}
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField
-            variant="outlined"
-            fullWidth
-            multiline
-            rows={10}
-            value={output}
-            onChange={(e) => {
-              setOutput(e.target.value);
-            }}
-            inputProps={{
-              style: {
-                fontFamily: 'monospace',
+          <MonacoEditor
+            options={{
+              minimap: {
+                enabled: false,
               }
+            }}
+            width="100%"
+            height={500}
+            language="json"
+            value={output}
+            onChange={(value) => {
+              setOutput(value);
             }}
           />
         </Grid>

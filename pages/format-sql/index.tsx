@@ -1,10 +1,10 @@
 import { useTheme } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
 import React, { useCallback, useEffect, useState } from 'react';
+import MonacoEditor from 'react-monaco-editor';
 import sqlFormatter from 'sql-formatter-plus';
 
 const initInput = 'select * from my_table where id = 1;';
@@ -61,37 +61,35 @@ export default function Index() {
 
       <Grid container spacing={4}>
         <Grid item xs={12} md={6}>
-          <TextField
-            variant="outlined"
-            fullWidth
-            multiline
-            rows={10}
-            value={input}
-            onChange={(e) => {
-              setInput(e.target.value);
-              convert(e.target.value);
-            }}
-            inputProps={{
-              style: {
-                fontFamily: 'monospace',
+          <MonacoEditor
+            options={{
+              minimap: {
+                enabled: false,
               }
+            }}
+            width="100%"
+            height={500}
+            language="sql"
+            value={input}
+            onChange={(value) => {
+              setInput(value);
+              convert(value);
             }}
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField
-            variant="outlined"
-            fullWidth
-            multiline
-            rows={10}
-            value={output}
-            onChange={(e) => {
-              setOutput(e.target.value);
-            }}
-            inputProps={{
-              style: {
-                fontFamily: 'monospace',
+          <MonacoEditor
+            options={{
+              minimap: {
+                enabled: false,
               }
+            }}
+            width="100%"
+            height={500}
+            language="sql"
+            value={output}
+            onChange={(value) => {
+              setOutput(value);
             }}
           />
         </Grid>
