@@ -33,6 +33,7 @@ export default function Index() {
       <Grid container spacing={4}>
         <Grid item xs={12} md={12}>
           <MonacoDiffEditor
+            theme="vs-dark"
             options={{
               minimap: {
                 enabled: false,
