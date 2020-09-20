@@ -69,7 +69,14 @@ function App() {
                           <meta property="og:title" content={seo.titleTemplate(title)} />
                           <meta property="og:site_name" content="Sudo&#x27;s Tools" />
                         </Helmet>
-                        <Page />
+                        <div style={{
+                          flex: 1,
+                          minHeight: '100vh',
+                          padding: routes[route].padding || theme.spacing(3)
+                        }}
+                        >
+                          <Page />
+                        </div>
                       </ErrorBoundary>
                     );
                   }}

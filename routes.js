@@ -118,11 +118,12 @@ module.exports = [
     sitemap: true,
   },
   {
-    title: 'Privacy Policy',
-    path: '/privacy-policy',
-    page: () => import('@pages/privacy-policy'),
+    title: 'Privacy Notice',
+    path: '/privacy-notice',
+    page: () => import('@pages/privacy-notice'),
     menus: ['links'],
     sitemap: true,
+    padding: '0',
   },
   {
     title: 'Cookie Policy',
@@ -130,6 +131,7 @@ module.exports = [
     page: () => import('@pages/cookie-policy'),
     menus: ['links'],
     sitemap: true,
+    padding: '0',
   },
   {
     title: 'Not Found',

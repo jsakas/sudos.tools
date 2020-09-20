@@ -61,7 +61,6 @@ const useStyles = makeStyles((theme: Theme) =>
       minHeight: '100vh',
     },
     content: {
-      padding: theme.spacing(3),
       flex: 1,
       minHeight: '100vh',
     },
@@ -91,7 +90,7 @@ function Logo() {
     <RouterLink to="/" style={{ color: theme.palette.common.white, textDecoration: 'none' }} title="Homepage">
       <Box component="span" display="flex" alignItems="center">
         <img alt="Sudo the Dog" src={logoImage} width={50} style={{ marginRight: theme.spacing(1) }} />
-        <Typography variant="h6" component="div" noWrap>
+        <Typography variant="h6" component="div" noWrap style={{ marginBottom: 0 }}>
           Sudo&apos;s Tools
         </Typography>
       </Box>

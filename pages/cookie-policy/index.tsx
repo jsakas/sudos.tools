@@ -1,18 +1,7 @@
-import Typography from '@material-ui/core/Typography';
 import React from 'react';
-
-const seo = {
-  title: 'Cookie Policy',
-
-};
 
 export default function Index() {
   return (
-    <>
-
-      <Typography variant="h3" component="h1">
-        {seo.title}
-      </Typography>
-    </>
+    <iframe src="https://app.termly.io/document/cookie-policy/4866c656-22e8-4014-b487-bae3c3835bd0" width="100%" height="100%" style={{ border: 0, minHeight: '100vh' }}></iframe>
   );
 }
