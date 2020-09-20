@@ -6,11 +6,11 @@ import Alert from '@material-ui/lab/Alert';
 import React, { useCallback, useEffect, useState } from 'react';
 import MonacoEditor from 'react-monaco-editor';
 
-const initInput = 'Thanks for using our devtool';
+const initInput = '';
 
 const seo = {
-  title: 'Base64 Encode',
-  description: 'Use this tool to take a string and encode it using the base64 algorithm.',
+  title: 'URL Decode',
+  description: 'Use this tool to decode an encoded URL string',
 };
 
 export default function Index() {
@@ -24,7 +24,7 @@ export default function Index() {
     let converted = '';
 
     try {
-      converted = btoa(userInput);
+      converted = decodeURIComponent(userInput);
     } catch (e) {
       console.error(e);
       setError(e);

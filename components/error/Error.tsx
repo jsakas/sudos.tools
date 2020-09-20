@@ -14,7 +14,7 @@ const Error: React.FC<ErrorProps> = (props: ErrorProps) => {
 
   return (
     <div>
-      {title && (<Typography variant="h3" component="h1" gutterBottom>{title}</Typography>)}
+      {title && (<Typography variant="h3" component="h1">{title}</Typography>)}
       <Typography>{message}</Typography>
       {error && CONFIG.debug?.stacktrace && (
         <code style={{ marginTop: theme.spacing(2) }}>

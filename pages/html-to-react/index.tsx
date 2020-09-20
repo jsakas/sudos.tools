@@ -3,14 +3,32 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
+import HTMLtoJSX from 'htmltojsx';
+import parserBabel from 'prettier/parser-babel';
+import prettier from 'prettier/standalone';
 import React, { useCallback, useEffect, useState } from 'react';
 import MonacoEditor from 'react-monaco-editor';
 
-const initInput = 'Thanks for using our devtool';
+// @ts-ignore;
+window.IN_BROWSER = true;
+
+const initInput = `<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Page Title</title>
+</head>
+
+<body>
+    <h1>This is a Heading</h1>
+    <p>This is a paragraph.</p>
+</body>
+
+</html>`;
 
 const seo = {
-  title: 'Base64 Encode',
-  description: 'Use this tool to take a string and encode it using the base64 algorithm.',
+  title: 'HTML to React',
+  description: 'Use this tool to convert HTML to React JSX.',
 };
 
 export default function Index() {
@@ -24,7 +42,13 @@ export default function Index() {
     let converted = '';
 
     try {
-      converted = btoa(userInput);
+      const cls = new HTMLtoJSX({
+        createClass: false,
+      });
+
+      converted = cls.convert(userInput);
+      converted = prettier.format(converted, { semi: false, parser: 'babel', plugins: [parserBabel] });
+
     } catch (e) {
       console.error(e);
       setError(e);
@@ -49,6 +73,7 @@ export default function Index() {
         {seo.description}
       </Typography>
       <Divider style={{ margin: theme.spacing(2, 0) }} />
+
       {error && (
         <Alert severity="error" style={{ margin: theme.spacing(2, 0) }}>{error.message}</Alert>
       )}
@@ -63,7 +88,7 @@ export default function Index() {
             }}
             width="100%"
             height={500}
-            language="plaintext"
+            language="markdown"
             value={input}
             onChange={(value) => {
               setInput(value);
@@ -80,7 +105,7 @@ export default function Index() {
             }}
             width="100%"
             height={500}
-            language="plaintext"
+            language="javascript"
             value={output}
             onChange={(value) => {
               setOutput(value);

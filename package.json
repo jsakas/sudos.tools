@@ -21,6 +21,8 @@
     "clsx": "^1.1.1",
     "cssfmt": "^2.1.5",
     "history": "^5.0.0",
+    "html-to-react": "^1.4.3",
+    "htmltojsx": "^0.3.0",
     "js-beautify": "^1.13.0",
     "jss-cli": "^6.0.1",
     "markdown-to-react-loader": "^1.2.0",

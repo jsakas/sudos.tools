@@ -77,6 +77,7 @@ module.exports = {
       favicons: faviconConfig,
     }),
     new DefinePlugin({
+      'IN_BROWSER': JSON.stringify(true), // for htmltojsx library
       'APP_ENV': JSON.stringify(APP_ENV),
       'CONFIG': JSON.stringify(PUBLIC_CONFIGURATION),
       'GITHUB_SHA': JSON.stringify(GITHUB_SHA),

@@ -6,6 +6,7 @@ import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
+import Link from '@material-ui/core/Link';
 import List from '@material-ui/core/List';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
@@ -79,7 +80,6 @@ const useStyles = makeStyles((theme: Theme) =>
       color: theme.palette.primary.contrastText,
       padding: theme.spacing(3),
       flex: 1,
-      minHeight: '50vh',
     }
   }),
 );
@@ -190,36 +190,36 @@ function DrawerLayout(props) {
         </main>
         <footer className={classes.footer}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={4} lg={3}>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
               <Typography variant="h4" gutterBottom>
                 Converters
               </Typography>
               {routes.filter(route => route.menus?.indexOf('converters') > -1).map((route) => (
-                <RouterLink to={route.path} key={route.title}>
+                <RouterLink to={route.path} key={route.title} title={route.title}>
                   <Typography component="span" title={route.title} style={{ color: theme.palette.common.white }}>
                     <ListItemText primary={route.title} />
                   </Typography>
                 </RouterLink>
               ))}
             </Grid>
-            <Grid item xs={12} md={4} lg={3}>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
               <Typography variant="h4" gutterBottom>
                 Formatters
               </Typography>
               {routes.filter(route => route.menus?.indexOf('formatters') > -1).map((route) => (
-                <RouterLink to={route.path} key={route.title}>
+                <RouterLink to={route.path} key={route.title} title={route.title}>
                   <Typography component="span" title={route.title} style={{ color: theme.palette.common.white }}>
                     <ListItemText primary={route.title} />
                   </Typography>
                 </RouterLink>
               ))}
             </Grid>
-            <Grid item xs={12} md={4} lg={3}>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
               <Typography variant="h4" gutterBottom>
                 Diff Checkers
               </Typography>
               {routes.filter(route => route.menus?.indexOf('diff') > -1).map((route) => (
-                <RouterLink to={route.path} key={route.title}>
+                <RouterLink to={route.path} key={route.title} title={route.title}>
                   <Typography component="span" title={route.title} style={{ color: theme.palette.common.white }}>
                     <ListItemText primary={route.title} />
                   </Typography>
@@ -227,25 +227,12 @@ function DrawerLayout(props) {
               ))}
             </Grid>
 
-            <Grid item xs={12} md={4} lg={3}>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
               <Typography variant="h4" gutterBottom>
                 Encoders &amp; Decoders
               </Typography>
               {routes.filter(route => route.menus?.indexOf('encoders') > -1).map((route) => (
-                <RouterLink to={route.path} key={route.title}>
-                  <Typography component="span" title={route.title} style={{ color: theme.palette.common.white }}>
-                    <ListItemText primary={route.title} />
-                  </Typography>
-                </RouterLink>
-              ))}
-            </Grid>
-
-            <Grid item xs={12} md={6} lg={3}>
-              <Typography variant="h4" gutterBottom>
-                Links
-              </Typography>
-              {routes.filter(route => route.menus?.indexOf('links') > -1).map((route) => (
-                <RouterLink to={route.path} key={route.title}>
+                <RouterLink to={route.path} key={route.title} title={route.title}>
                   <Typography component="span" title={route.title} style={{ color: theme.palette.common.white }}>
                     <ListItemText primary={route.title} />
                   </Typography>
@@ -253,6 +240,19 @@ function DrawerLayout(props) {
               ))}
             </Grid>
           </Grid>
+          <div style={{ marginTop: theme.spacing(6) }}>
+            <Typography variant="caption">
+              &copy; Copyright 2020 Doubledrop, LLC
+              {routes.filter(route => route.menus?.indexOf('links') > -1).map((route) => (
+                <>
+                &nbsp;&nbsp;|&nbsp;&nbsp;
+                  <Link component={RouterLink} to={route.path} key={route.title}>
+                    {route.title}
+                  </Link>
+                </>
+              ))}
+            </Typography>
+          </div>
         </footer>
       </div>
     </div>
