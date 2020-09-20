@@ -30,7 +30,7 @@ function App() {
       <ScrollToTop />
       <Switch>
         {Object.keys(routes).map((route) => {
-          const Page = routes[route].page.default;
+          const Page = require(routes[route].page).default;
           const path = routes[route].path;
           const title = routes[route].title;
           const description = routes[route].description;
