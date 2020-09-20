@@ -17,6 +17,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import routes from './routes';
 import seo from './seo';
 
+const DEFAULT_DESCRIPTION = 'Free online tools for developers, including formatters, minifiers, validators, compactors and many more!';
+
 function App() {
   React.useEffect(() => {
     if (CONFIG.gtm?.enabled)
@@ -34,7 +36,7 @@ function App() {
           const Page = loadable(routes[route].page);
           const path = routes[route].path;
           const title = routes[route].title;
-          const description = routes[route].description;
+          const description = routes[route].description || DEFAULT_DESCRIPTION;
 
           return (
             <Route
@@ -50,7 +52,7 @@ function App() {
                     <ErrorBoundary key={layoutKey}>
                       <Helmet>
                         <title>{title}</title>
-                        <meta name="description" content={description}></meta>
+                        <meta name="description" content={description} />
                         <meta property="og:url" content={new URL(path, seo.url).href} />
                         <meta property="og:title" content={seo.titleTemplate(title)} />
                         <meta property="og:site_name" content="Sudo&#x27;s Tools" />
