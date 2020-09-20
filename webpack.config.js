@@ -18,7 +18,7 @@ const {
   GITHUB_REF, // the branch or tag ref that triggered the workflow
 } = process.env;
 
-const BUILD_DIR = path.join(__dirname, 'public');
+const BUILD_DIR = path.join(__dirname, 'build');
 const PUBLIC_CONFIGURATION = require(`./conf/${APP_ENV}/public`);
 
 const fixSentryRelease = (ref) => {
@@ -65,7 +65,7 @@ module.exports = {
       logo: path.resolve(__dirname, 'images', 'sudo.png'),
       publicPath: '/static/',
       cache: true,
-      inject: 'force',
+      inject: true,
       favicons: faviconConfig,
     }),
     new DefinePlugin({

@@ -6,7 +6,7 @@ import DrawerLayout from '@components/layouts/DrawerLayout';
 import ScrollToTop from '@components/scroll-to-top/ScrollToTop';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
-import routes from '@routes';
+import routes from './routes';
 import theme from '@src/theme';
 import React from 'react';
 import ReactDOM from 'react-dom';

@@ -50,7 +50,7 @@ const main = async () => {
     collapseContent: true,
   });
 
-  fs.writeFileSync('./public/sitemap.xml', formatted);
+  fs.writeFileSync('./build/sitemap.xml', formatted);
 };
 
 main().catch(console.error);

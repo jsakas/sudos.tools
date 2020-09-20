@@ -7,6 +7,7 @@
     "build:production": "WEBPACK_ENV=production APP_ENV=production webpack",
     "dev": "WEBPACK_ENV=development APP_ENV=development webpack-dev-server",
     "build:sitemap": "node generate-sitemap.js",
+    "build:public": "cp -r build puublic",
     "lint": "eslint . --ext .ts,.tsx,.js"
   },
   "dependencies": {
