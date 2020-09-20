@@ -69,6 +69,13 @@ module.exports = [
     sitemap: true,
   },
   {
+    title: 'HTML Formatter',
+    path: '/format-html',
+    page: () => import('@pages/format-html'),
+    menus: ['formatters'],
+    sitemap: true,
+  },
+  {
     title: 'CSS Formatter',
     path: '/format-css',
     page: () => import('@pages/format-css'),

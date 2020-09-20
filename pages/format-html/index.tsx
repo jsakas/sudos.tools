@@ -4,22 +4,14 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
 import { html } from 'js-beautify';
-import marked from 'marked';
 import React, { useCallback, useEffect, useState } from 'react';
 import MonacoEditor from 'react-monaco-editor';
 
-const initInput = `# Hello, World
-
-This is a markdown document
-
-- List item 1
-- List item 2
-- List item 3
-`;
+const initInput = '<!DOCTYPE html><html><head><title>Page Title</title></head><body><h1>This is a Heading</h1><p>This is a paragraph.</p></body></html>';
 
 const seo = {
-  title: ' Markdown to HTML',
-  description: 'Use this tool to convert markdown to HTML.',
+  title: 'HTML Formatter',
+  description: 'Use this tool to format and beautify HTML.',
 };
 
 
@@ -34,8 +26,7 @@ export default function Index() {
     let converted = '';
 
     try {
-      converted = marked(userInput);
-      converted = html(converted);
+      converted = html(userInput);
     } catch (e) {
       console.error(e);
       setError(e);
@@ -75,7 +66,7 @@ export default function Index() {
             }}
             width="100%"
             height={500}
-            language="markdown"
+            language="html"
             value={input}
             onChange={(value) => {
               setInput(value);
