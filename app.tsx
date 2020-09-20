@@ -31,24 +31,23 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <ScrollToTop />
-      <Switch>
-        {Object.keys(routes).map((route) => {
-          const Page = loadable(routes[route].page);
-          const path = routes[route].path;
-          const title = routes[route].title;
-          const description = routes[route].description || DEFAULT_DESCRIPTION;
+      <DrawerLayout>
+        <Switch>
+          {Object.keys(routes).map((route) => {
+            const Page = loadable(routes[route].page);
+            const path = routes[route].path;
+            const title = routes[route].title;
+            const description = routes[route].description || DEFAULT_DESCRIPTION;
 
-          return (
-            <Route
-              key={path}
-              exact
-              path={path}
-              render={({ match }) => {
-                const layoutKey = match.path;
+            return (
+              <Route
+                key={path}
+                exact
+                path={path}
+                render={({ match }) => {
+                  const layoutKey = match.path;
 
-
-                return (
-                  <DrawerLayout key={layoutKey}>
+                  return (
                     <ErrorBoundary key={layoutKey}>
                       <Helmet>
                         <title>{title}</title>
@@ -59,14 +58,14 @@ function App() {
                       </Helmet>
                       <Page />
                     </ErrorBoundary>
-                  </DrawerLayout>
-                );
-              }}
-            />
-          );
-        })}
-      </Switch>
-    </ThemeProvider>
+                  );
+                }}
+              />
+            );
+          })}
+        </Switch>
+      </DrawerLayout>
+    </ThemeProvider >
   );
 }
 

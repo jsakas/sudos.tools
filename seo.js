@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Free online development tools',
+  title: 'Free online tools for developers',
   titleTemplate: t => `${t} | Sudo's Tools`,
   url: 'https://sudos.tools/',
   openGraph: {

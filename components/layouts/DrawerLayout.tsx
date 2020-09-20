@@ -1,4 +1,3 @@
-import LinkBehavior from '@components/link-behavior/LinkBehavior';
 import logoImage from '@images/sudo.png';
 import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
@@ -8,8 +7,8 @@ import Drawer from '@material-ui/core/Drawer';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import ListSubheader from '@material-ui/core/ListSubheader';
 import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -20,6 +19,7 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import routes from '../../routes';
+import ToolList from './ToolList';
 
 const drawerWidth = 240;
 
@@ -70,6 +70,9 @@ const useStyles = makeStyles((theme: Theme) =>
       alignItems: 'center',
       color: theme.palette.common.white,
       padding: theme.spacing(0, 2),
+      position: 'fixed',
+      width: drawerWidth,
+      zIndex: 10,
     },
     footer: {
       backgroundColor: theme.palette.primary.main,
@@ -96,12 +99,12 @@ function Logo() {
   );
 }
 
-export default function DrawerLayout(props) {
+function DrawerLayout(props) {
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const { sm } = useBreakpoints();
+  const { sm, md } = useBreakpoints();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -126,7 +129,11 @@ export default function DrawerLayout(props) {
           {!sm && (
             <Logo />
           )}
-
+          {md && (
+            <Typography>
+              Free online tools for developers
+            </Typography>
+          )}
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="Website Navigation">
@@ -148,12 +155,30 @@ export default function DrawerLayout(props) {
               <Logo />
             </div>
             <Divider />
-            <List>
-              {routes.filter(route => route.menus?.indexOf('tools') > -1).map((route) => (
-                <ListItem button component={LinkBehavior} href={route.path} key={route.title} title={route.title}>
-                  <ListItemText primary={route.title} />
-                </ListItem>
-              ))}
+            <List
+              style={{ paddingTop: 65 }}
+              subheader={
+                <ListSubheader component="div" id="nested-list-subheader">
+                  Navigation
+                </ListSubheader>
+              }
+            >
+              <ToolList
+                title="Formatters"
+                routes={routes.filter(route => route.menus?.indexOf('formatters') > -1)}
+              />
+              <ToolList
+                title="Converters"
+                routes={routes.filter(route => route.menus?.indexOf('converters') > -1)}
+              />
+              <ToolList
+                title="Diff Checkers"
+                routes={routes.filter(route => route.menus?.indexOf('diff') > -1)}
+              />
+              <ToolList
+                title="Encoders &amp; Decoders"
+                routes={routes.filter(route => route.menus?.indexOf('encoders') > -1)}
+              />
             </List>
           </div>
         </Drawer>
@@ -165,11 +190,11 @@ export default function DrawerLayout(props) {
         </main>
         <footer className={classes.footer}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={3}>
+            <Grid item xs={12} md={4} lg={3}>
               <Typography variant="h4" gutterBottom>
-                Tools
+                Converters
               </Typography>
-              {routes.filter(route => route.menus?.indexOf('tools') > -1).map((route) => (
+              {routes.filter(route => route.menus?.indexOf('converters') > -1).map((route) => (
                 <RouterLink to={route.path} key={route.title}>
                   <Typography component="span" title={route.title} style={{ color: theme.palette.common.white }}>
                     <ListItemText primary={route.title} />
@@ -177,6 +202,44 @@ export default function DrawerLayout(props) {
                 </RouterLink>
               ))}
             </Grid>
+            <Grid item xs={12} md={4} lg={3}>
+              <Typography variant="h4" gutterBottom>
+                Formatters
+              </Typography>
+              {routes.filter(route => route.menus?.indexOf('formatters') > -1).map((route) => (
+                <RouterLink to={route.path} key={route.title}>
+                  <Typography component="span" title={route.title} style={{ color: theme.palette.common.white }}>
+                    <ListItemText primary={route.title} />
+                  </Typography>
+                </RouterLink>
+              ))}
+            </Grid>
+            <Grid item xs={12} md={4} lg={3}>
+              <Typography variant="h4" gutterBottom>
+                Diff Checkers
+              </Typography>
+              {routes.filter(route => route.menus?.indexOf('diff') > -1).map((route) => (
+                <RouterLink to={route.path} key={route.title}>
+                  <Typography component="span" title={route.title} style={{ color: theme.palette.common.white }}>
+                    <ListItemText primary={route.title} />
+                  </Typography>
+                </RouterLink>
+              ))}
+            </Grid>
+
+            <Grid item xs={12} md={4} lg={3}>
+              <Typography variant="h4" gutterBottom>
+                Encoders &amp; Decoders
+              </Typography>
+              {routes.filter(route => route.menus?.indexOf('encoders') > -1).map((route) => (
+                <RouterLink to={route.path} key={route.title}>
+                  <Typography component="span" title={route.title} style={{ color: theme.palette.common.white }}>
+                    <ListItemText primary={route.title} />
+                  </Typography>
+                </RouterLink>
+              ))}
+            </Grid>
+
             <Grid item xs={12} md={6} lg={3}>
               <Typography variant="h4" gutterBottom>
                 Links
@@ -195,3 +258,5 @@ export default function DrawerLayout(props) {
     </div>
   );
 }
+
+export default React.memo(DrawerLayout);

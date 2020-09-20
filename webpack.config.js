@@ -102,6 +102,7 @@ module.exports = {
         'xml',
         'sql',
         'markdown',
+        'html',
       ],
     }),
     new NormalModuleReplacementPlugin(
