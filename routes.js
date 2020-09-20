@@ -13,6 +13,20 @@ module.exports = [
     sitemap: true,
   },
   {
+    title: 'Sass to CSS',
+    path: '/sass-to-css',
+    page: () => import('@pages/sass-to-css'),
+    menus: ['tools'],
+    sitemap: true,
+  },
+  {
+    title: 'Sass to JSS',
+    path: '/sass-to-jss',
+    page: () => import('@pages/sass-to-jss'),
+    menus: ['tools'],
+    sitemap: true,
+  },
+  {
     title: 'Markdown to HTML',
     path: '/markdown-to-html',
     page: () => import('@pages/markdown-to-html'),

@@ -63,7 +63,7 @@ export default function Index() {
             }}
             width="100%"
             height={500}
-            language="json"
+            language="plaintext"
             value={input}
             onChange={(value) => {
               setInput(value);
@@ -80,7 +80,7 @@ export default function Index() {
             }}
             width="100%"
             height={500}
-            language="json"
+            language="plaintext"
             value={output}
             onChange={(value) => {
               setOutput(value);

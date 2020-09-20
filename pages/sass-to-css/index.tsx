@@ -5,12 +5,29 @@ import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
 import React, { useCallback, useEffect, useState } from 'react';
 import MonacoEditor from 'react-monaco-editor';
+import Sass from 'sass.js/dist/sass.js';
 
-const initInput = 'VGhhbmtzIGZvciB1c2luZyBvdXIgZGV2dG9vbA==';
+// @ts-ignore
+import sassWorker from '!!file-loader!sass.js/dist/sass.worker.js';
+
+const sass = new Sass(sassWorker);
+
+const initInput = `
+$primary: black;
+$secondary: rgba($primary, .5);
+
+.my-class {
+  color: $secondary;
+
+  body.loaded & {
+    color: $primary;
+  }
+}
+`;
 
 const seo = {
-  title: 'Base64 Decode',
-  description: 'Use this tool to take a base64 encoded string and decode it.',
+  title: 'Sass Compiler',
+  description: 'Use this tool to compile sass quickly in the browser.',
 };
 
 export default function Index() {
@@ -21,17 +38,23 @@ export default function Index() {
 
   const convert = useCallback((userInput: string): string => {
     setError(undefined);
-    let converted = '';
+    const converted = '';
 
     try {
-      converted = atob(userInput);
+
+      sass.compile(userInput, function (converted) {
+        if (converted.status === 1) {
+          console.error(converted);
+          setError(new Error(converted.message));
+        }
+        setOutput(converted.text);
+      });
+
     } catch (e) {
       console.error(e);
       setError(e);
       return converted;
     }
-
-    setOutput(converted);
   }, []);
 
   useEffect(() => {
@@ -49,6 +72,7 @@ export default function Index() {
         {seo.description}
       </Typography>
       <Divider style={{ margin: theme.spacing(2, 0) }} />
+
       {error && (
         <Alert severity="error" style={{ margin: theme.spacing(2, 0) }}>{error.message}</Alert>
       )}
@@ -63,7 +87,7 @@ export default function Index() {
             }}
             width="100%"
             height={500}
-            language="plaintext"
+            language="scss"
             value={input}
             onChange={(value) => {
               setInput(value);
@@ -80,7 +104,7 @@ export default function Index() {
             }}
             width="100%"
             height={500}
-            language="plaintext"
+            language="css"
             value={output}
             onChange={(value) => {
               setOutput(value);
