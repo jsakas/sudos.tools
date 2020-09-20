@@ -1,0 +1,9 @@
+[Settings]
+
+[build.environment]
+  YARN_VERSION = "1.22.0"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
