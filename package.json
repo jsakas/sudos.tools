@@ -6,7 +6,7 @@
     "build:development": "WEBPACK_ENV=production APP_ENV=development webpack",
     "build:production": "WEBPACK_ENV=production APP_ENV=production webpack",
     "dev": "WEBPACK_ENV=development APP_ENV=development webpack-dev-server",
-    "build:sitemap": "node generate-sitemap.js",
+    "build:sitemap": "ts-node generate-sitemap.ts",
     "build:public": "cp -r public/* build",
     "lint": "eslint . --ext .ts,.tsx,.js"
   },
@@ -67,11 +67,15 @@
     "monaco-editor-webpack-plugin": "^1.9.1",
     "style-loader": "^1.2.1",
     "ts-loader": "^8.0.4",
+    "ts-node": "^10.4.0",
     "tsconfig-paths-webpack-plugin": "^3.3.0",
     "typescript": "^4.0.3",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "xml-js": "^1.6.11"
+  },
+  "engines": {
+    "node": "14"
   }
 }

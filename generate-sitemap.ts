@@ -1,8 +1,9 @@
-const fs = require('fs');
-const format = require('xml-formatter');
-const routes = require('./routes');
-const seo = require('./seo');
-const xmlJs = require('xml-js');
+import fs from 'fs';
+import format from 'xml-formatter';
+import xmlJs from 'xml-js';
+
+import routes from './routes';
+import seo from './seo';
 
 const main = async () => {
   const urlset = routes.filter(r => r.sitemap).map(route => {
