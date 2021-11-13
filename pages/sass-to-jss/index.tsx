@@ -49,8 +49,6 @@ export default function Index() {
           setError(new Error(converted.message));
         }
 
-        console.log(converted.text);
-
         let jss = '';
 
         try {
@@ -97,7 +95,7 @@ export default function Index() {
       <Grid container spacing={4}>
         <Grid item xs={12} md={6}>
           <MonacoEditor
-            theme="vs-dark"
+            theme="vs-light"
             options={{
               minimap: {
                 enabled: false,
@@ -115,7 +113,7 @@ export default function Index() {
         </Grid>
         <Grid item xs={12} md={6}>
           <MonacoEditor
-            theme="vs-dark"
+            theme="vs-light"
             options={{
               minimap: {
                 enabled: false,
@@ -123,7 +121,7 @@ export default function Index() {
             }}
             width="100%"
             height={500}
-            language="jss"
+            language="json"
             value={output}
             onChange={(value) => {
               setOutput(value);

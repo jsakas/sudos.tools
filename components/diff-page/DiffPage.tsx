@@ -38,7 +38,7 @@ const DiffPage : React.FC<DiffPageProps> = (props: DiffPageProps) => {
       <Grid container spacing={4}>
         <Grid item xs={12} md={12}>
           <MonacoDiffEditor
-            theme="vs-dark"
+            theme="vs-light"
             options={{
               minimap: {
                 enabled: false,
