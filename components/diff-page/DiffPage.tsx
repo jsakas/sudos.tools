@@ -3,18 +3,23 @@ import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Alert from '@material-ui/lab/Alert';
+import { languageNameMap } from '@src/languages';
 import React, { useState } from 'react';
 import { MonacoDiffEditor } from 'react-monaco-editor';
 
-const seo = {
-  title: 'JSON Diff Tool',
-  description: 'Use this tool to check the difference in your JSON data',
-};
+type DiffPageProps = {
+  language: monacoLanguages;
+}
 
-
-export default function Index() {
+const DiffPage : React.FC<DiffPageProps> = (props: DiffPageProps) => {
+  const { language } = props;
   const theme = useTheme();
   const [error] = useState<Error>();
+
+  const seo = {
+    title: `${languageNameMap[language]} Diff Tool`,
+    description: `Use this tool to check the difference in your ${languageNameMap[language]}`,
+  };
 
   return (
     <>
@@ -44,10 +49,16 @@ export default function Index() {
             defaultValue=''
             width="100%"
             height={500}
-            language="json"
+            language={language}
           />
         </Grid>
       </Grid>
     </>
   );
-}
+};
+
+DiffPage.defaultProps = {
+  language: 'json'
+};
+
+export default DiffPage;

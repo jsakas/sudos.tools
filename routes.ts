@@ -1,4 +1,8 @@
-module.exports = [
+import React from 'react';
+
+import languages, { languageNameMap } from './src/languages';
+
+export default [
   {
     title: 'Free online tools for developers',
     path: '/',
@@ -54,13 +58,21 @@ module.exports = [
     menus: ['formatters'],
     sitemap: true,
   },
-  {
-    title: 'JSON Diff Tool',
-    path: '/json-diff',
-    page: () => import('@pages/json-diff'),
+  ...languages.map(language => ({
+    title: `${languageNameMap[language]} Diff Tool`,
+    path: `/${language}-diff`,
+    page: () => import('@components/diff-page/DiffPage')
+      .then(module => {
+        return {
+          // @ts-ignore
+          default: () => React.createElement(module.default, {
+            language,
+          }),
+        };
+      }),
     menus: ['diff'],
     sitemap: true,
-  },
+  })),
   {
     title: 'XML Formatter',
     path: '/format-xml',
