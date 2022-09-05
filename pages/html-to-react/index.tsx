@@ -1,18 +1,13 @@
+import RenderTool from '@components/render-options/RenderTool';
 import { useTheme } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Alert from '@material-ui/lab/Alert';
-import HTMLtoJSX from 'htmltojsx';
-import parserBabel from 'prettier/parser-babel';
-import prettier from 'prettier/standalone';
-import React, { useCallback, useEffect, useState } from 'react';
-import MonacoEditor from 'react-monaco-editor';
+import { HtmlToJsxCompiler, HtmlToJsxCompilerOptions } from '@tools/compilers/html-to-jsx';
+import { JavaScriptFormatter, JavaScriptFormatterOptions } from '@tools/formatters/javascript';
+import React, {  } from 'react';
 
-// @ts-ignore;
-window.IN_BROWSER = true;
 
-const initInput = `<!DOCTYPE html>
+const defaultValue = `<!DOCTYPE html>
 <html>
 
 <head>
@@ -33,39 +28,9 @@ const seo = {
 
 export default function Index() {
   const theme = useTheme();
-  const [input, setInput] = useState('');
-  const [output, setOutput] = useState('');
-  const [error, setError] = useState<Error>();
-
-  const convert = useCallback((userInput: string): string => {
-    setError(undefined);
-    let converted = '';
-
-    try {
-      const cls = new HTMLtoJSX({
-        createClass: false,
-      });
-
-      converted = cls.convert(userInput);
-      converted = prettier.format(converted, { semi: false, parser: 'babel', plugins: [parserBabel] });
-
-    } catch (e) {
-      console.error(e);
-      setError(e);
-      return converted;
-    }
-
-    setOutput(converted);
-  }, []);
-
-  useEffect(() => {
-    setInput(initInput);
-    convert(initInput);
-  }, []);
 
   return (
     <>
-
       <Typography variant="h3" component="h1">
         {seo.title}
       </Typography>
@@ -73,48 +38,13 @@ export default function Index() {
         {seo.description}
       </Typography>
       <Divider style={{ margin: theme.spacing(2, 0) }} />
-
-      {error && (
-        <Alert severity="error" style={{ margin: theme.spacing(2, 0) }}>{error.message}</Alert>
-      )}
-
-      <Grid container spacing={4}>
-        <Grid item xs={12} md={6}>
-          <MonacoEditor
-            theme="vs-light"
-            options={{
-              minimap: {
-                enabled: false,
-              }
-            }}
-            width="100%"
-            height={500}
-            language="markdown"
-            value={input}
-            onChange={(value) => {
-              setInput(value);
-              convert(value);
-            }}
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <MonacoEditor
-            theme="vs-light"
-            options={{
-              minimap: {
-                enabled: false,
-              }
-            }}
-            width="100%"
-            height={500}
-            language="javascript"
-            value={output}
-            onChange={(value) => {
-              setOutput(value);
-            }}
-          />
-        </Grid>
-      </Grid>
+      <RenderTool
+        converters={[HtmlToJsxCompiler, JavaScriptFormatter]}
+        defaultValue={defaultValue}
+        lang1="html"
+        lang2="javascript"
+        options={{ ...HtmlToJsxCompilerOptions, ...JavaScriptFormatterOptions }}
+      />
     </>
   );
 }

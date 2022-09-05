@@ -249,12 +249,12 @@ function DrawerLayout(props) {
             <Typography variant="caption">
               &copy; Copyright 2020 Doubledrop, LLC
               {routes.filter(route => route.menus?.indexOf('links') > -1).map((route) => (
-                <>
+                <span key={route.path}>
                 &nbsp;&nbsp;|&nbsp;&nbsp;
                   <Link component={RouterLink} to={route.path} key={route.title}>
                     {route.title}
                   </Link>
-                </>
+                </span>
               ))}
             </Typography>
           </div>

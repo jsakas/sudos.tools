@@ -32,6 +32,12 @@
       "@pages/*": [
         "pages/*"
       ],
+      "@tools/*": [
+        "tools/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ],
     }
   },
   "include": [

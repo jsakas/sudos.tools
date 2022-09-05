@@ -2,16 +2,23 @@ import RenderTool from '@components/render-options/RenderTool';
 import { useTheme } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import Typography from '@material-ui/core/Typography';
-import { HtmlFormatter, HtmlFormatterOptions } from '@tools/formatters/html';
+import { TypeScriptFormatter, TypeScriptFormatterOptions } from '@tools/formatters/typescript';
 import React, {  } from 'react';
 
-const defaultValue = '<!DOCTYPE html><html><head><title>Page Title</title></head><body><h1>This is a Heading</h1><p>This is a paragraph.</p></body></html>';
+const defaultValue = `
+function say( word :string) {
+ console.log(word)
+  }
+
+  say('Hello, World!')
+   say("Thanks for using Sudo's Tools")
+
+`;
 
 const seo = {
-  title: 'HTML Formatter',
-  description: 'Use this tool to format and beautify HTML.',
+  title: 'TypeScript Formatter',
+  description: 'Use this tool to format and beautify TypeScript.',
 };
-
 
 export default function Index() {
   const theme = useTheme();
@@ -26,11 +33,11 @@ export default function Index() {
       </Typography>
       <Divider style={{ margin: theme.spacing(2, 0) }} />
       <RenderTool
-        converters={[HtmlFormatter]}
+        converters={[TypeScriptFormatter]}
         defaultValue={defaultValue}
-        lang1="html"
-        lang2="html"
-        options={HtmlFormatterOptions}
+        lang1="typescript"
+        lang2="typescript"
+        options={TypeScriptFormatterOptions}
       />
     </>
   );

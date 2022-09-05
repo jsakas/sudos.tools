@@ -10,6 +10,12 @@ export default [
     sitemap: true,
   },
   {
+    title: 'ISO 8601 Duration Checker',
+    path: '/iso-8601-duration-checker',
+    page: () => import('@pages/iso-8601-duration-checker'),
+    sitemap: true,
+  },
+  {
     title: 'CSS to JSS',
     path: '/css-to-jss',
     page: () => import('@pages/css-to-jss'),
@@ -55,6 +61,20 @@ export default [
     title: 'JSON Formatter',
     path: '/format-json',
     page: () => import('@pages/format-json'),
+    menus: ['formatters'],
+    sitemap: true,
+  },
+  {
+    title: 'JavaScript Formatter',
+    path: '/format-javascript',
+    page: () => import('@pages/format-javascript'),
+    menus: ['formatters'],
+    sitemap: true,
+  },
+  {
+    title: 'TypeScript Formatter',
+    path: '/format-typescript',
+    page: () => import('@pages/format-typescript'),
     menus: ['formatters'],
     sitemap: true,
   },

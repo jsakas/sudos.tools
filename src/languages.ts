@@ -46,7 +46,7 @@ const languages : monacoLanguages[] = [
   // 'pgsql',
   // 'php',
   // 'pla',
-  // 'plaintext',
+  'plaintext',
   // 'postiats',
   // 'powerquery',
   // 'powershell',
@@ -95,10 +95,10 @@ export const languageNameMap : Record<monacoLanguages, string> = {
   shell: 'Shell',
   sql: 'SQL',
   typescript: 'TypeScript',
+  plaintext: 'Plantext',
   python: 'Python',
   xml: 'XML',
-  yaml: 'Yaml'
-
+  yaml: 'Yaml',
 };
 
 export default languages;

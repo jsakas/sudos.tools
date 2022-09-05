@@ -46,7 +46,7 @@ type monacoLanguages =
   // 'pgsql' |
   // 'php' |
   // 'pla' |
-  // 'plaintext' |
+  'plaintext' |
   // 'postiats' |
   // 'powerquery' |
   // 'powershell' |

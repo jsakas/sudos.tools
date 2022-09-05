@@ -40,7 +40,6 @@ module.exports = {
     path: 'empty',
   },
   devServer: {
-    host: '0.0.0.0',
     port: 9992,
     historyApiFallback: true,
     disableHostCheck: true,
