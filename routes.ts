@@ -13,6 +13,7 @@ export default [
     title: 'ISO 8601 Duration Checker',
     path: '/iso-8601-duration-checker',
     page: () => import('@pages/iso-8601-duration-checker'),
+    menus: ['misc'],
     sitemap: true,
   },
   {

@@ -1,8 +1,8 @@
-import { useTheme } from '@material-ui/core';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Alert from '@material-ui/lab/Alert';
+import Alert from '@mui/material/Alert';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import { useTheme } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 import { languageNameMap } from '@src/languages';
 import React, { useState } from 'react';
 import { MonacoDiffEditor } from 'react-monaco-editor';
@@ -29,7 +29,7 @@ const DiffPage : React.FC<DiffPageProps> = (props: DiffPageProps) => {
       <Typography gutterBottom>
         {seo.description}
       </Typography>
-      <Divider style={{ margin: theme.spacing(2, 0) }} />
+      <Divider />
 
       {error && (
         <Alert severity="error" style={{ margin: theme.spacing(2, 0) }}>{error.message}</Alert>

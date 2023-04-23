@@ -1,7 +1,7 @@
-import { useTheme } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
+import { useTheme } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 import React from 'react';
 
 

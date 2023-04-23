@@ -1,7 +1,8 @@
-import Grid from '@material-ui/core/Grid';
-import { useTheme } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Alert from '@material-ui/lab/Alert';
+import Alert from '@mui/material/Alert';
+import Grid from '@mui/material/Grid';
+import { useTheme } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
+import { editor } from 'monaco-editor';
 import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import MonacoEditor from 'react-monaco-editor';
 import { pipeAsync } from 'utils/pipe';
@@ -54,16 +55,15 @@ const RenderTool: React.FC<RenderToolProps> = (props) => {
   const [output, setOutput] = useState('');
   const [error, setError] = useState<Error | undefined>();
 
+  const [, setInputEditor] = useState<editor.IStandaloneCodeEditor>();
+  const [, setOutputEditor] = useState<editor.IStandaloneCodeEditor>();
+
   const clearError = () => setError(undefined);
 
   const convert = useCallback((userInput: string, options: ConfigurationOptions) => {
     const convertersWithOptions = converters.map(fn => converterWithOptions(fn, options));
 
     pipeAsync(...convertersWithOptions)(userInput)
-      .then(o => {
-        console.log('output', o);
-        return o;
-      })
       .then(setOutput)
       .then(clearError)
       .catch(setError);
@@ -80,14 +80,20 @@ const RenderTool: React.FC<RenderToolProps> = (props) => {
       )}
 
       <Grid container spacing={4}>
-
         <Grid item xs={12} md={5}>
           <MonacoEditor
             theme="vs-light"
+            editorDidMount={(editor) => {
+              setInputEditor(editor);
+            }}
             options={{
+              tabSize: Number(options.indent?.value || 2),
               minimap: {
                 enabled: false,
-              }
+              },
+              rulers: [],
+              // renderIndentGuides: true,
+              detectIndentation: true,
             }}
             width="100%"
             height={500}
@@ -101,10 +107,17 @@ const RenderTool: React.FC<RenderToolProps> = (props) => {
         <Grid item xs={12} md={5}>
           <MonacoEditor
             theme="vs-light"
+            editorDidMount={(editor) => {
+              setOutputEditor(editor);
+            }}
             options={{
+              tabSize: Number(options.indent?.value || 2),
               minimap: {
                 enabled: false,
-              }
+              },
+              rulers: [],
+              // renderIndentGuides: true,
+              detectIndentation: true,
             }}
             width="100%"
             height={500}

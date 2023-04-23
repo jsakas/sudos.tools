@@ -70,7 +70,7 @@ type monacoLanguages =
   // 'sparql' |
   'sql' |
   // 'st' |
-  // 'swift' |
+  'swift' |
   // 'systemverilog' |
   // 'tcl' |
   // 'twig' |

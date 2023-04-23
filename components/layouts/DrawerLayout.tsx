@@ -1,88 +1,77 @@
 import useRouter from '@hooks/useRouter';
 import logoImage from '@images/sudo-sm.png';
-import AppBar from '@material-ui/core/AppBar';
-import Box from '@material-ui/core/Box';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
-import Drawer from '@material-ui/core/Drawer';
-import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import Link from '@material-ui/core/Link';
-import List from '@material-ui/core/List';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import MenuIcon from '@material-ui/icons/Menu';
-import clsx from 'clsx';
+import MenuIcon from '@mui/icons-material/Menu';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import ListSubheader from '@mui/material/ListSubheader';
+import { styled, useTheme } from '@mui/material/styles';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 import useBreakpoints from 'hooks/useBreakpoints';
 import React, { useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 import routes from '../../routes';
-import ToolList from './ToolList';
+import { Footer } from './components/Footer';
+import ToolList from './components/ToolList';
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      display: 'flex',
-      minHeight: '100vh',
-    },
-    drawer: {
-      [theme.breakpoints.up('sm')]: {
-        width: drawerWidth,
-        flexShrink: 0,
-      },
-    },
-    appBar: {
-      boxShadow: 'none',
-      [theme.breakpoints.up('sm')]: {
-        width: `calc(100% - ${drawerWidth}px)`,
-        marginLeft: drawerWidth,
-      },
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-      [theme.breakpoints.up('sm')]: {
-        display: 'none',
-      },
-    },
-    toolbar: theme.mixins.toolbar,
-    drawerPaper: {
-      width: drawerWidth,
-      borderRight: 0,
-    },
-    contentWrapper: {
-      flexGrow: 1,
-      display: 'flex',
-      flexDirection: 'column',
-      minHeight: '100vh',
-    },
-    content: {
-      flex: '1 1 auto',
-      minHeight: '100vh',
-    },
-    mobileToolbar: {
-      background: theme.palette.primary.main,
-      display: 'flex',
-      alignItems: 'center',
-      color: theme.palette.common.white,
-      padding: theme.spacing(0, 2),
-      position: 'fixed',
-      width: drawerWidth,
-      zIndex: 10,
-    },
-    footer: {
-      backgroundColor: theme.palette.primary.main,
-      color: theme.palette.primary.contrastText,
-      padding: theme.spacing(3),
-      flex: '1 1 auto',
-    }
-  }),
-);
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  boxShadow: 'none',
+  [theme.breakpoints.up('sm')]: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+  },
+}));
+
+const StyledMenuButton = styled(IconButton)(({ theme }) => ({
+  marginRight: theme.spacing(2),
+  [theme.breakpoints.up('sm')]: {
+    display: 'none',
+  },
+}));
+
+const StyledDrawer = styled('nav')(({ theme }) => ({
+  width: drawerWidth,
+  [theme.breakpoints.up('sm')]: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+}));
+
+const StyledContentWrapper = styled('div')(() => ({
+  flexGrow: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  minHeight: '100vh',
+}));
+
+const StyledContent = styled('div')(() => ({
+  flex: '1 1 auto',
+  minHeight: '100vh',
+}));
+
+const MobileToolbar = styled('div')(({ theme }) => ({
+  ...theme.mixins.toolbar,
+  background: theme.palette.primary.main,
+  display: 'flex',
+  alignItems: 'center',
+  color: theme.palette.common.white,
+  padding: theme.spacing(0, 2),
+  position: 'fixed',
+  width: drawerWidth,
+  zIndex: 10,
+}));
+
+const StyledRoot = styled('div')(() => ({
+  display: 'flex',
+  minHeight: '100vh',
+}));
 
 function Logo() {
   const theme = useTheme();
@@ -99,9 +88,11 @@ function Logo() {
   );
 }
 
-function DrawerLayout(props) {
-  const { window } = props;
-  const classes = useStyles();
+export type DrawerLayoutProps = {
+  children?: React.ReactNode;
+}
+
+function DrawerLayout(props: DrawerLayoutProps) {
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const { sm, md } = useBreakpoints();
@@ -115,22 +106,19 @@ function DrawerLayout(props) {
     setMobileOpen(!mobileOpen);
   };
 
-  const container = window !== undefined ? () => window().document.body : undefined;
-
   return (
-    <div className={classes.root}>
+    <StyledRoot>
       <CssBaseline />
-      <AppBar position="fixed" className={classes.appBar}>
+      <StyledAppBar position="fixed">
         <Toolbar>
-          <IconButton
+          <StyledMenuButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            className={classes.menuButton}
           >
             <MenuIcon />
-          </IconButton>
+          </StyledMenuButton>
           {!sm && (
             <Logo />
           )}
@@ -140,30 +128,30 @@ function DrawerLayout(props) {
             </Typography>
           )}
         </Toolbar>
-      </AppBar>
-      <nav className={classes.drawer} aria-label="Website Navigation">
+      </StyledAppBar>
+      <StyledDrawer aria-label="Website Navigation">
         <Drawer
-          container={container}
+          sx={{
+            width: drawerWidth,
+            flexShrink: 0,
+            ['& .MuiDrawer-paper']: { width: drawerWidth, boxSizing: 'border-box' },
+          }}
           variant={sm ? 'permanent' : 'temporary'}
           anchor={theme.direction === 'rtl' ? 'right' : 'left'}
           open={mobileOpen}
           onClose={handleDrawerToggle}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
           ModalProps={{
             keepMounted: true, // Better open performance on mobile.
           }}
         >
           <div>
-            <div className={clsx(classes.toolbar, classes.mobileToolbar)}>
+            <MobileToolbar>
               <Logo />
-            </div>
-            <Divider />
+            </MobileToolbar>
             <List
               style={{ paddingTop: 65 }}
               subheader={
-                <ListSubheader component="div" id="nested-list-subheader">
+                <ListSubheader component="div" id="nested-list-subheader" sx={{ backgroundColor: 'inherit' }}>
                   Navigation
                 </ListSubheader>
               }
@@ -184,83 +172,22 @@ function DrawerLayout(props) {
                 title="Encoders &amp; Decoders"
                 routes={routes.filter(route => route.menus?.indexOf('encoders') > -1)}
               />
+              <ToolList
+                title="Misc"
+                routes={routes.filter(route => route.menus?.indexOf('misc') > -1)}
+              />
             </List>
           </div>
         </Drawer>
-      </nav>
-      <div className={classes.contentWrapper}>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
+      </StyledDrawer>
+      <StyledContentWrapper>
+        <StyledContent>
+          <Toolbar />
           {props.children}
-        </main>
-        <footer className={classes.footer}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Typography variant="h4" gutterBottom>
-                Converters
-              </Typography>
-              {routes.filter(route => route.menus?.indexOf('converters') > -1).map((route) => (
-                <RouterLink to={route.path} key={route.title} title={route.title}>
-                  <Typography component="span" title={route.title} style={{ color: theme.palette.common.white }}>
-                    <ListItemText primary={route.title} />
-                  </Typography>
-                </RouterLink>
-              ))}
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Typography variant="h4" gutterBottom>
-                Formatters
-              </Typography>
-              {routes.filter(route => route.menus?.indexOf('formatters') > -1).map((route) => (
-                <RouterLink to={route.path} key={route.title} title={route.title}>
-                  <Typography component="span" title={route.title} style={{ color: theme.palette.common.white }}>
-                    <ListItemText primary={route.title} />
-                  </Typography>
-                </RouterLink>
-              ))}
-            </Grid>
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Typography variant="h4" gutterBottom>
-                Diff Checkers
-              </Typography>
-              {routes.filter(route => route.menus?.indexOf('diff') > -1).map((route) => (
-                <RouterLink to={route.path} key={route.title} title={route.title}>
-                  <Typography component="span" title={route.title} style={{ color: theme.palette.common.white }}>
-                    <ListItemText primary={route.title} />
-                  </Typography>
-                </RouterLink>
-              ))}
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <Typography variant="h4" gutterBottom>
-                Encoders &amp; Decoders
-              </Typography>
-              {routes.filter(route => route.menus?.indexOf('encoders') > -1).map((route) => (
-                <RouterLink to={route.path} key={route.title} title={route.title}>
-                  <Typography component="span" title={route.title} style={{ color: theme.palette.common.white }}>
-                    <ListItemText primary={route.title} />
-                  </Typography>
-                </RouterLink>
-              ))}
-            </Grid>
-          </Grid>
-          <div style={{ marginTop: theme.spacing(6) }}>
-            <Typography variant="caption">
-              &copy; Copyright 2020 Doubledrop, LLC
-              {routes.filter(route => route.menus?.indexOf('links') > -1).map((route) => (
-                <span key={route.path}>
-                &nbsp;&nbsp;|&nbsp;&nbsp;
-                  <Link component={RouterLink} to={route.path} key={route.title}>
-                    {route.title}
-                  </Link>
-                </span>
-              ))}
-            </Typography>
-          </div>
-        </footer>
-      </div>
-    </div>
+        </StyledContent>
+        <Footer />
+      </StyledContentWrapper>
+    </StyledRoot>
   );
 }
 

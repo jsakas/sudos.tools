@@ -1,7 +1,6 @@
 import RenderTool from '@components/render-options/RenderTool';
-import { useTheme } from '@material-ui/core';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
 import { XmlFormatter, XmlFormatterOptions } from '@tools/formatters/xml';
 import React, {  } from 'react';
 
@@ -18,8 +17,6 @@ const seo = {
 };
 
 export default function Index() {
-  const theme = useTheme();
-
   return (
     <>
       <Typography variant="h3" component="h1">
@@ -28,7 +25,7 @@ export default function Index() {
       <Typography gutterBottom>
         {seo.description}
       </Typography>
-      <Divider style={{ margin: theme.spacing(2, 0) }} />
+      <Divider />
       <RenderTool
         converters={[XmlFormatter]}
         defaultValue={defaultValue}

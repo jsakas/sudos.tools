@@ -1,9 +1,9 @@
-import { useTheme } from '@material-ui/core';
-import Divider from '@material-ui/core/Divider';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import Alert from '@material-ui/lab/Alert';
+import Alert from '@mui/material/Alert';
+import Divider from '@mui/material/Divider';
+import Grid from '@mui/material/Grid';
+import { useTheme } from '@mui/material/styles';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import markdownToReact from 'markdown-to-react-loader/lib/markdown-to-react-loader';
 import parserBabel from 'prettier/parser-babel';
 import prettier from 'prettier/standalone';
@@ -55,7 +55,7 @@ export default function Index() {
       <Typography gutterBottom>
         {seo.description}
       </Typography>
-      <Divider style={{ margin: theme.spacing(2, 0) }} />
+      <Divider />
 
       {error && (
         <Alert severity="error" style={{ margin: theme.spacing(2, 0) }}>{error.message}</Alert>

@@ -1,5 +1,5 @@
-import { useTheme } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import { useTheme } from '@mui/material/styles';
+import Typography from '@mui/material/Typography';
 import React from 'react';
 
 type ErrorProps = {

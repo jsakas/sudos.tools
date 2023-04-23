@@ -32,28 +32,19 @@ const fixSentryRelease = (ref) => {
 
 module.exports = {
   mode: WEBPACK_ENV === 'production' ? 'production' : 'development',
-  watch: WEBPACK_ENV === 'production' ? false : true,
-  devtool: WEBPACK_ENV === 'production' ? 'source-map' : 'cheap-eval-source-map',
+  devtool: WEBPACK_ENV === 'production' ? 'source-map' : 'eval',
   stats: 'errors-only',
-  node: {
-    fs: 'empty',
-    path: 'empty',
-  },
   devServer: {
     port: 9992,
     historyApiFallback: true,
-    disableHostCheck: true,
-    index: path.resolve(BUILD_DIR, 'index.html'),
-    contentBase: BUILD_DIR,
+    static: {
+      serveIndex: true,
+      directory: BUILD_DIR,
+    }
   },
   entry: {
     'main': './app.tsx',
     'sentry': './integrations/Sentry.ts',
-    'editor.worker': 'monaco-editor/esm/vs/editor/editor.worker.js',
-    'json.worker': 'monaco-editor/esm/vs/language/json/json.worker',
-    'css.worker': 'monaco-editor/esm/vs/language/css/css.worker',
-    'html.worker': 'monaco-editor/esm/vs/language/html/html.worker',
-    'ts.worker': 'monaco-editor/esm/vs/language/typescript/ts.worker',
   },
   output: {
     globalObject: 'self',
@@ -182,6 +173,11 @@ module.exports = {
     )
   ].filter(i => i),
   resolve: {
+    fallback: {
+      buffer: false,
+      fs: false,
+      path: false,
+    },
     plugins: [
       new TsconfigPathsPlugin({
         configFile: path.resolve(__dirname, 'tsconfig.json'),
@@ -235,16 +231,8 @@ module.exports = {
       },
       {
         test: /\.(eot|woff|ttf|svg|png|jpg|gif)$/,
-        exclude: [
-          path.resolve(__dirname, 'node_modules/@fortawesome/fontawesome-pro/svgs/'),
-          path.resolve(__dirname, '../node_modules/@fortawesome/fontawesome-pro/svgs/'),
-        ],
-        use: [
-          {
-            loader: 'file-loader',
-          }
-        ]
-      }
+        type: 'asset/resource'
+      },
     ]
   },
 };

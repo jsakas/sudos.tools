@@ -1,19 +1,12 @@
 import LinkBehavior from '@components/link-behavior/LinkBehavior';
-import Collapse from '@material-ui/core/Collapse';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import { makeStyles } from '@material-ui/core/styles';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import Collapse from '@mui/material/Collapse';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import { useTheme } from '@mui/material/styles';
 import React from 'react';
-
-const useStyles = makeStyles((theme) => ({
-
-  nested: {
-    paddingLeft: theme.spacing(4),
-  },
-}));
 
 type ToolListProps = {
     title: string;
@@ -21,7 +14,7 @@ type ToolListProps = {
 }
 
 const ToolList: React.FC<ToolListProps> = (props: ToolListProps) => {
-  const classes = useStyles();
+  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const handleClick = () => {
     setOpen(!open);
@@ -29,16 +22,16 @@ const ToolList: React.FC<ToolListProps> = (props: ToolListProps) => {
 
   return (
     <>
-      <ListItem button onClick={handleClick}>
+      <ListItemButton onClick={handleClick}>
         <ListItemText primary={(<span style={{ color: 'rgba(0, 0, 0, 0.75)' }}>{props.title}</span>)} />
         {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
+      </ListItemButton>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {props.routes.map((route) => (
-            <ListItem button component={LinkBehavior} href={route.path} key={route.title} title={route.title} className={classes.nested}>
+            <ListItemButton component={LinkBehavior} href={route.path} key={route.title} title={route.title} style={{ paddingLeft: theme.spacing(4) }}>
               <ListItemText primary={route.title} />
-            </ListItem>
+            </ListItemButton>
           ))}
         </List>
       </Collapse>
