@@ -46,7 +46,7 @@ type monacoLanguages =
   // 'pgsql' |
   // 'php' |
   // 'pla' |
-  // 'plaintext' |
+  'plaintext' |
   // 'postiats' |
   // 'powerquery' |
   // 'powershell' |
@@ -70,7 +70,7 @@ type monacoLanguages =
   // 'sparql' |
   'sql' |
   // 'st' |
-  // 'swift' |
+  'swift' |
   // 'systemverilog' |
   // 'tcl' |
   // 'twig' |

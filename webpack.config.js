@@ -32,29 +32,19 @@ const fixSentryRelease = (ref) => {
 
 module.exports = {
   mode: WEBPACK_ENV === 'production' ? 'production' : 'development',
-  watch: WEBPACK_ENV === 'production' ? false : true,
-  devtool: WEBPACK_ENV === 'production' ? 'source-map' : 'cheap-eval-source-map',
+  devtool: WEBPACK_ENV === 'production' ? 'source-map' : 'eval',
   stats: 'errors-only',
-  node: {
-    fs: 'empty',
-    path: 'empty',
-  },
   devServer: {
-    host: '0.0.0.0',
     port: 9992,
     historyApiFallback: true,
-    disableHostCheck: true,
-    index: path.resolve(BUILD_DIR, 'index.html'),
-    contentBase: BUILD_DIR,
+    static: {
+      serveIndex: true,
+      directory: BUILD_DIR,
+    }
   },
   entry: {
-    'main': './app.tsx',
-    'sentry': './integrations/Sentry.ts',
-    'editor.worker': 'monaco-editor/esm/vs/editor/editor.worker.js',
-    'json.worker': 'monaco-editor/esm/vs/language/json/json.worker',
-    'css.worker': 'monaco-editor/esm/vs/language/css/css.worker',
-    'html.worker': 'monaco-editor/esm/vs/language/html/html.worker',
-    'ts.worker': 'monaco-editor/esm/vs/language/typescript/ts.worker',
+    'main': './src/App.tsx',
+    'sentry': './src/integrations/Sentry.ts',
   },
   output: {
     globalObject: 'self',
@@ -64,13 +54,13 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'html', 'base.html'),
+      template: path.join(__dirname, 'src', 'html', 'base.html'),
       filename: '../index.html',
       chunks: ['sentry', 'main'],
       alwaysWriteToDisk: true,
     }),
     new FaviconsWebpackPlugin({
-      logo: path.resolve(__dirname, 'images', 'sudo.png'),
+      logo: path.resolve(__dirname, 'src', 'images', 'sudo.png'),
       publicPath: '/static/',
       cache: true,
       inject: true,
@@ -179,10 +169,15 @@ module.exports = {
     }),
     new NormalModuleReplacementPlugin(
       /cssfmt\/lib\/config.js/,
-      path.resolve(__dirname, 'overrides/cssfmt/config.js')
+      path.resolve(__dirname, 'src/overrides/cssfmt/config.js')
     )
   ].filter(i => i),
   resolve: {
+    fallback: {
+      buffer: false,
+      fs: false,
+      path: false,
+    },
     plugins: [
       new TsconfigPathsPlugin({
         configFile: path.resolve(__dirname, 'tsconfig.json'),
@@ -208,7 +203,7 @@ module.exports = {
         test: /\.css$/,
         include: [
           path.resolve(__dirname, './node_modules/monaco-editor'),
-          path.resolve(__dirname, 'styles'),
+          path.resolve(__dirname, 'src', 'styles'),
         ],
         use: [
           'style-loader',
@@ -236,16 +231,8 @@ module.exports = {
       },
       {
         test: /\.(eot|woff|ttf|svg|png|jpg|gif)$/,
-        exclude: [
-          path.resolve(__dirname, 'node_modules/@fortawesome/fontawesome-pro/svgs/'),
-          path.resolve(__dirname, '../node_modules/@fortawesome/fontawesome-pro/svgs/'),
-        ],
-        use: [
-          {
-            loader: 'file-loader',
-          }
-        ]
-      }
+        type: 'asset/resource'
+      },
     ]
   },
 };

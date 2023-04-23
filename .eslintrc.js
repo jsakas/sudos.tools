@@ -44,7 +44,8 @@ module.exports = {
     'react/display-name': 'off',
     'no-prototype-builtins': 'off',
     'no-console': 'off',
-    'simple-import-sort/sort': 'error',
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
     'padding-line-between-statements': [
       'error',
       { blankLine: 'always', prev: ['const', 'let', 'var'], next: '*'},

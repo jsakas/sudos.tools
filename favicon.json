@@ -12,9 +12,7 @@
         "android": true,
         "appleIcon": true,
         "appleStartup": true,
-        "coast": true,
         "favicons": true,
-        "firefox": true,
         "windows": true,
         "yandex": true
     }

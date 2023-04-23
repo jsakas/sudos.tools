@@ -10,6 +10,13 @@ export default [
     sitemap: true,
   },
   {
+    title: 'ISO 8601 Duration Checker',
+    path: '/iso-8601-duration-checker',
+    page: () => import('@pages/iso-8601-duration-checker'),
+    menus: ['misc'],
+    sitemap: true,
+  },
+  {
     title: 'CSS to JSS',
     path: '/css-to-jss',
     page: () => import('@pages/css-to-jss'),
@@ -58,10 +65,24 @@ export default [
     menus: ['formatters'],
     sitemap: true,
   },
+  {
+    title: 'JavaScript Formatter',
+    path: '/format-javascript',
+    page: () => import('@pages/format-javascript'),
+    menus: ['formatters'],
+    sitemap: true,
+  },
+  {
+    title: 'TypeScript Formatter',
+    path: '/format-typescript',
+    page: () => import('@pages/format-typescript'),
+    menus: ['formatters'],
+    sitemap: true,
+  },
   ...languages.map(language => ({
     title: `${languageNameMap[language]} Diff Tool`,
     path: `/${language}-diff`,
-    page: () => import('@components/diff-page/DiffPage')
+    page: () => import('@components/DiffPage/DiffPage')
       .then(module => {
         return {
           // @ts-ignore
@@ -135,7 +156,6 @@ export default [
     page: () => import('@pages/privacy-notice'),
     menus: ['links'],
     sitemap: true,
-    padding: '0',
   },
   {
     title: 'Cookie Policy',
@@ -143,7 +163,6 @@ export default [
     page: () => import('@pages/cookie-policy'),
     menus: ['links'],
     sitemap: true,
-    padding: '0',
   },
   {
     title: 'Not Found',
