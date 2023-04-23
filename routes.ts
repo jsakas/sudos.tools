@@ -156,7 +156,6 @@ export default [
     page: () => import('@pages/privacy-notice'),
     menus: ['links'],
     sitemap: true,
-    padding: '0',
   },
   {
     title: 'Cookie Policy',
@@ -164,7 +163,6 @@ export default [
     page: () => import('@pages/cookie-policy'),
     menus: ['links'],
     sitemap: true,
-    padding: '0',
   },
   {
     title: 'Not Found',

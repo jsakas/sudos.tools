@@ -1,9 +1,9 @@
 import { Box, Grid, ListItemText,Typography } from '@mui/material';
+import Link from '@mui/material/Link';
 import { styled } from '@mui/material/styles';
 import theme from '@src/theme';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import routes from 'routes';
 
 const StyledFooter = styled('footer')(({ theme }) => ({
@@ -93,7 +93,7 @@ export function Footer() {
           {routes.filter(route => route.menus?.indexOf('links') > -1).map((route) => (
             <span key={route.path}>
                             &nbsp;&nbsp;|&nbsp;&nbsp;
-              <Link component={RouterLink} to={route.path} key={route.title}>
+              <Link color="#f50057" component={RouterLink} to={route.path} key={route.title}>
                 {route.title}
               </Link>
             </span>
