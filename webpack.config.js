@@ -43,8 +43,8 @@ module.exports = {
     }
   },
   entry: {
-    'main': './app.tsx',
-    'sentry': './integrations/Sentry.ts',
+    'main': './src/App.tsx',
+    'sentry': './src/integrations/Sentry.ts',
   },
   output: {
     globalObject: 'self',
@@ -54,13 +54,13 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, 'html', 'base.html'),
+      template: path.join(__dirname, 'src', 'html', 'base.html'),
       filename: '../index.html',
       chunks: ['sentry', 'main'],
       alwaysWriteToDisk: true,
     }),
     new FaviconsWebpackPlugin({
-      logo: path.resolve(__dirname, 'images', 'sudo.png'),
+      logo: path.resolve(__dirname, 'src', 'images', 'sudo.png'),
       publicPath: '/static/',
       cache: true,
       inject: true,
@@ -169,7 +169,7 @@ module.exports = {
     }),
     new NormalModuleReplacementPlugin(
       /cssfmt\/lib\/config.js/,
-      path.resolve(__dirname, 'overrides/cssfmt/config.js')
+      path.resolve(__dirname, 'src/overrides/cssfmt/config.js')
     )
   ].filter(i => i),
   resolve: {
@@ -203,7 +203,7 @@ module.exports = {
         test: /\.css$/,
         include: [
           path.resolve(__dirname, './node_modules/monaco-editor'),
-          path.resolve(__dirname, 'styles'),
+          path.resolve(__dirname, 'src', 'styles'),
         ],
         use: [
           'style-loader',

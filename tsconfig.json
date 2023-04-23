@@ -12,31 +12,31 @@
     "strict": false,
     "paths": {
       "@components/*": [
-        "components/*"
+        "src/components/*"
       ],
       "@hooks/*": [
-        "hooks/*"
+        "src/hooks/*"
       ],
       "@integrations/*": [
-        "integrations/*"
+        "src/integrations/*"
       ],
       "@src/*": [
         "src/*"
       ],
       "@styles/*": [
-        "styles/*"
+        "src/styles/*"
       ],
       "@images/*": [
-        "images/*"
+        "src/images/*"
       ],
       "@pages/*": [
-        "pages/*"
+        "src/pages/*"
       ],
       "@tools/*": [
-        "tools/*"
+        "src/tools/*"
       ],
       "@utils/*": [
-        "utils/*"
+        "src/utils/*"
       ],
     }
   },

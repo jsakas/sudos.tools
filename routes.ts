@@ -82,7 +82,7 @@ export default [
   ...languages.map(language => ({
     title: `${languageNameMap[language]} Diff Tool`,
     path: `/${language}-diff`,
-    page: () => import('@components/diff-page/DiffPage')
+    page: () => import('@components/DiffPage/DiffPage')
       .then(module => {
         return {
           // @ts-ignore
